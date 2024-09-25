@@ -12,13 +12,14 @@ export const Home: FC<Props> = ({ className }) => {
   const { t, i18n } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
+
+  const time: Date = new Date();
+  const currentYear = time.getFullYear();
+
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
     localStorage.setItem('selectedLanguage', language);
   };
-  const time: Date = new Date();
-  const currentDate = time.toLocaleTimeString();
-  const currentYear = time.getFullYear();
 
   useClickAway(ref, () => {
     setIsVisible(false);
