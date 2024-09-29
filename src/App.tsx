@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import Button from '@mui/material/Button';
 import { FC, useEffect, useRef, useState } from 'react';
-import { Modal } from './components/modal';
 import { useClickAway } from 'react-use';
 import { ApplicationLanguage, DefaultApplicationLanguage } from './utils/constans';
+import { Modal } from './components/modal';
 
 const App: FC = () => {
   const { t, i18n } = useTranslation();
