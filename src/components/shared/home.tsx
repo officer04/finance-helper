@@ -33,7 +33,7 @@ export const Home: FC<Props> = ({ className }) => {
         if (err) return console.log('Ошибка загрузки языка:', err);
       });
     } else {
-      i18n.changeLanguage(DefaultApplicationLanguage.default);
+      i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);
     }
   }, []);
 
