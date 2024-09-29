@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 import { Modal } from './modal';
+import { ApplicationLanguage, DefaultApplicationLanguage } from '../../lib/constans';
 
 interface Props {
   className?: string;
@@ -10,8 +11,8 @@ interface Props {
 
 export const Home: FC<Props> = ({ className }) => {
   const { t, i18n } = useTranslation();
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const [isRegisterModalVisible, SetIsRegisterModalVisible] = useState(false);
+  const modalRef = useRef(null);
 
   const time: Date = new Date();
   const currentYear = time.getFullYear();
@@ -21,8 +22,8 @@ export const Home: FC<Props> = ({ className }) => {
     localStorage.setItem('selectedLanguage', language);
   };
 
-  useClickAway(ref, () => {
-    setIsVisible(false);
+  useClickAway(modalRef, () => {
+    SetIsRegisterModalVisible(false);
   });
 
   useEffect(() => {
@@ -32,29 +33,28 @@ export const Home: FC<Props> = ({ className }) => {
         if (err) return console.log('Ошибка загрузки языка:', err);
       });
     } else {
-      const defaultLang = 'ru';
-      i18n.changeLanguage(defaultLang);
+      i18n.changeLanguage(DefaultApplicationLanguage.default);
     }
   }, []);
 
   return (
     <div className="text-center">
-      <button onClick={() => changeLanguage('en')}>EN</button>
-      <button onClick={() => changeLanguage('ru')}>RU</button>
+      <button onClick={() => changeLanguage(ApplicationLanguage.ENGLISH)}>EN</button>
+      <button onClick={() => changeLanguage(ApplicationLanguage.RUSSIAN)}>RU</button>
       <hr />
       <div>
         <h1>{t('title')}</h1>
       </div>
-      <Button variant="outlined" onClick={() => setIsVisible(!isVisible)}>
+      <Button variant="outlined" onClick={() => SetIsRegisterModalVisible(!isRegisterModalVisible)}>
         {t('button')}
       </Button>
       <p>
         {`${currentYear}`} || {t('footerText')}
       </p>
-      {isVisible && (
+      {isRegisterModalVisible && (
         <Modal>
           <div className="flex justify-center items-center">
-            <div ref={ref} className="w-52 h-52 bg-white p-5">
+            <div ref={modalRef} className="w-52 h-52 bg-white p-5">
               <h1 className="text-center">{t('modalText')}</h1>
             </div>
           </div>
