@@ -4,5 +4,12 @@
   },
   "button": "Получить доступ",
   "footerText": "Всё права защищены",
-  "modalText": "Ещё в разработке"
+  "modalText": "Ещё в разработке",
+  "inputNameUser": "Имя",
+  "inputLastNameUser": "Фамилия",
+  "inputEmailUser": "Почта",
+  "inputPasswordUser": "Пароль",
+  "inputRepeatPasswordUser": "Повтор пароля",
+  "buttonRegister": "Зарегистрироваться",
+  "registerTitle": "Регистрация"
 }

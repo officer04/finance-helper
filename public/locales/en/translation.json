@@ -4,6 +4,13 @@
   },
   "button": "Get the Finance-Helper",
   "footerText": "All rights reserved",
-  "modalText": "Coming Soon"
+  "modalText": "Coming Soon",
+  "inputNameUser": "Name",
+  "inputLastNameUser": "Last Name",
+  "inputEmailUser": "Email",
+  "inputPasswordUser": "Password",
+  "inputRepeatPasswordUser": "Repeat password",
+  "buttonRegister": "Register",
+  "registerTitle": "Register"
 }
 
