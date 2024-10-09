@@ -1,0 +1,25 @@
+{
+  "title": "Welcome, this is a Finance-Helper!",
+  "description": {
+  },
+  "buttonOpenModalRegister": "Get the Finance-Helper",
+  "buttonOpenModalLogin": "Open dashboard",
+  "footerText": "All rights reserved",
+  "modalText": "Coming Soon",
+  "inputNameUser": "Name",
+  "inputLastNameUser": "Last Name",
+  "inputEmailUser": "Email",
+  "inputPasswordUser": "Password",
+  "inputRepeatPasswordUser": "Repeat password",
+  "buttonRegister": "Register",
+  "buttonLogin": "Login",
+  "registerTitle": "Register",
+  "loginTitle": "Login",
+  "inputRequiredFields": "Required fields",
+  "inputErrorEmail": "The email address is incorrect",
+  "inputErrorLastName": "The lastName must consist of Latin letters and numbers from 2 to 32 characters in length",
+  "inputErrorFirstName": "The firstNam must consist of Latin letters and numbers from 2 to 32 characters in length",
+  "inputErrorPassword": "The password must consist of Latin letters and numbers from 4 to 32 characters in length",
+  "inputErrorRepeatPassword": "Must be equal password field"
+}
+
