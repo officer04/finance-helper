@@ -1,59 +1,39 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { axiosInstance } from '..';
 
-interface CounterState {
-  value: number;
-}
+import { axiosInstance } from '../index';
+import { LoginUserProps } from '../../types/login-user-props';
+import { RegisterUserProps } from '../../types/register-user-props';
+import { UserResponse } from '../../types/user-response';
 
-interface userPropsLogin {
-  email: string,
-  password: string,
-}
+export const registerUser = createAsyncThunk(
+  'users/registerUser',
+  async (body: RegisterUserProps, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post('/register', body);
+      return response.data as UserResponse;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
+  },
+);
 
-interface userPropsRegister extends userPropsLogin {
-  firstName: string,
-  lastName: string,
-  preferredLocalizationCode: string
-}
+export const loginUser = createAsyncThunk(
+  'users/registerUser',
+  async (body: LoginUserProps, thunkAPI) => {
+    const response = await axiosInstance.post('/authorization/credentials', body);
+    return response;
+  },
+);
 
-export const registerUser = createAsyncThunk('users/registerUser', async (body: userPropsRegister, thunkAPI) => {
-  const response = await axiosInstance.post('/register', body);
-  return response;
-});
-
-export const loginUser = createAsyncThunk('users/registerUser', async (body: userPropsLogin, thunkAPI) => {
-  const response = await axiosInstance.post('/authorization/credentials', body);
-  return response;
-});
-
-const initialState: CounterState = {
-  value: 0,
-};
+const initialState = {};
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    // builder.addCase(fetchUserById.fulfilled, (state, action) => {
-    // })
-  },
+  reducers: {},
 });
 
-export const { increment, decrement, incrementByAmount } = userSlice.actions;
-
-// export const selectCount = (state: RootState) => state.counter.value
+export const {} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -13,8 +13,12 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
 import FormHelperText from '@mui/material/FormHelperText';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { RegexConstants } from '../../lib/constans';
 
-interface Props {}
+interface Props {
+  setOpen: (str: boolean) => void;
+}
 
 interface IFormInput {
   firstName: string;
@@ -24,9 +28,10 @@ interface IFormInput {
   repeatPassword: string;
 }
 
-export const FormRegister: FC<Props> = ({}) => {
+export const FormRegister: FC<Props> = ({ setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
   const {
@@ -45,16 +50,24 @@ export const FormRegister: FC<Props> = ({}) => {
     event.preventDefault();
   };
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    setIsLoadingButton(true);
     const body = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
-      preferredLocalizationCode: navigator.language.split('-')[0],
     };
+
     dispatch(registerUser(body))
-      .then((res) => console.log('res', res))
-      .catch((err) => console.log('err', err));
+      .unwrap()
+      .then((res) => {
+        localStorage.setItem('bearerToken', res.bearerToken);
+      })
+      .catch((err) => {
+        setOpen(true);
+        console.log('err', err);
+      })
+      .finally(() => setIsLoadingButton(false));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-center mb-3">
@@ -63,19 +76,15 @@ export const FormRegister: FC<Props> = ({}) => {
         {...register('firstName', {
           required: t('inputRequiredFields'),
           minLength: {
-            value: 5,
+            value: 2,
             message: t('inputErrorLastName'),
           },
           maxLength: {
             value: 32,
             message: t('inputErrorLastName'),
           },
-          // pattern: {
-          //   value: /^(?=.*\d)\w{2,32}$/m,
-          //   message: t('inputErrorFirstName'),
-          // },
         })}
-        style={{ minWidth: '100px' }}
+        style={{ width: '300px' }}
         helperText={errors?.firstName?.message}
         id="outlined-number"
         label={t('inputNameUser')}
@@ -85,19 +94,16 @@ export const FormRegister: FC<Props> = ({}) => {
         error={!!errors?.lastName}
         {...register('lastName', {
           required: t('inputRequiredFields'),
-          min: {
-            value: 5,
+          minLength: {
+            value: 2,
             message: t('inputErrorLastName'),
           },
-          max: {
+          maxLength: {
             value: 32,
             message: t('inputErrorLastName'),
           },
-          // pattern: {
-          //   value: /^(?=.*\d)\w{2,32}$/m,
-          //   message: t('inputErrorLastName'),
-          // },
         })}
+        style={{ width: '300px' }}
         id="outlined-error"
         label={t('inputLastNameUser')}
         helperText={errors?.lastName?.message}
@@ -108,17 +114,22 @@ export const FormRegister: FC<Props> = ({}) => {
         {...register('email', {
           required: t('inputRequiredFields'),
           pattern: {
-            value:
-              /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
+            value: RegexConstants.EMAIL,
             message: t('inputErrorEmail'),
           },
         })}
+        style={{ width: '300px' }}
         id="outlined-error"
         label={t('inputEmailUser')}
         helperText={errors?.email?.message}
         margin="dense"
       />
-      <FormControl error={!!errors?.password} sx={{ m: 1, width: '25ch' }} variant="outlined">
+      <FormControl
+        error={!!errors?.password}
+        style={{ width: '300px' }}
+        sx={{ m: 1, width: '25ch' }}
+        variant="outlined"
+      >
         <InputLabel htmlFor="outlined-adornment-password">{t('inputPasswordUser')}</InputLabel>
 
         <OutlinedInput
@@ -127,7 +138,7 @@ export const FormRegister: FC<Props> = ({}) => {
           {...register('password', {
             required: t('inputRequiredFields'),
             pattern: {
-              value: /^(?=.*\d)\w{2,32}$/m,
+              value: RegexConstants.PASSWORD,
               message: t('inputErrorPassword'),
             },
           })}
@@ -148,7 +159,12 @@ export const FormRegister: FC<Props> = ({}) => {
         />
         <FormHelperText id="component-error-text">{errors?.password?.message}</FormHelperText>
       </FormControl>
-      <FormControl error={!!errors?.repeatPassword} sx={{ m: 1, width: '25ch' }} variant="outlined">
+      <FormControl
+        error={!!errors?.repeatPassword}
+        style={{ width: '300px' }}
+        sx={{ m: 1, width: '25ch' }}
+        variant="outlined"
+      >
         <InputLabel htmlFor="outlined-adornment-password">
           {t('inputRepeatPasswordUser')}
         </InputLabel>
@@ -178,9 +194,16 @@ export const FormRegister: FC<Props> = ({}) => {
         <FormHelperText id="component-error-text">{errors?.repeatPassword?.message}</FormHelperText>
       </FormControl>
       <div className="text-center">
-        <Button variant="outlined" disabled={!isValid} type="submit" size="medium">
+        <LoadingButton
+          loading={isLoadingButton}
+          variant="outlined"
+          disabled={!isValid}
+          style={{ width: '300px' }}
+          type="submit"
+          size="large"
+        >
           {t('buttonRegister')}
-        </Button>
+        </LoadingButton>
       </div>
     </form>
   );

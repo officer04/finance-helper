@@ -1,35 +1,36 @@
 import axios from 'axios';
+import { MiddlewareActionError } from '../types/middleware-action-error';
+import { MiddlewareActionErrorType } from '../types/middleware-action-error-type';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:5719',
 });
 
-// Интерсептор запросов
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Здесь можно добавить любые заголовки или настройки перед запросом
     console.log('Запрос:', config);
-    return config; // Возвращаем конфигурацию запроса
+    return config;
   },
   (error) => {
-    // Обработка ошибок запроса
     console.error('Ошибка при выполнении запроса:', error);
-    return Promise.reject(error); // Возвращаем Promise с ошибкой
-  }
+    return Promise.reject(error);
+  },
 );
 
-// Интерсептор ответов
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log("ответ", response)
-    return response; // Возвращаем успешный ответ
+    console.log('ответ', response);
+    return response;
   },
   (error) => {
-    console.log(error)
-    console.log("сервак лежит")
-    // Обработка ошибок ответа
-    console.error('Ошибка при выполнении ответа:', error.response ? error.response.data : error.message);
-    return Promise.reject(error); // Возвращаем Promise с ошибкой
+    console.error('Error was thrown while axios request performing', error);
 
-  }
+    const handledError: MiddlewareActionError = {
+      type: MiddlewareActionErrorType.AxiosError,
+      detail: error.response?.data?.detail,
+      statusCode: error.response?.status,
+    };
+
+    return Promise.reject(handledError);
+  },
 );
