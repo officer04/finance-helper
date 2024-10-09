@@ -85,7 +85,7 @@ export const Home: FC<Props> = ({ className }) => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('loginTitle')}
           </Typography>
-          <FormLogin />
+          <FormLogin setOpenSnackbar={setOpenSnackbar} />
         </div>
       </Modal>
     </div>
