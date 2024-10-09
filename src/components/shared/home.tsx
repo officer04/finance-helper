@@ -1,65 +1,93 @@
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { FC, useState } from 'react';
+
 import Button from '@mui/material/Button';
-import { FC, useEffect, useRef, useState } from 'react';
-import { useClickAway } from 'react-use';
-import { Modal } from './modal';
-import { ApplicationLanguage, DefaultApplicationLanguage } from '../../lib/constans';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import { useTranslation } from 'react-i18next';
+import { Alert } from '@mui/material';
+import { useAppSelector } from '../../redux/hooks';
+
+import { FormRegister } from './form-register';
+import { FormLogin } from './form-login';
 
 interface Props {
   className?: string;
 }
 
 export const Home: FC<Props> = ({ className }) => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openModalLogin, setOpenModalLogin] = useState(false);
+  const [openModalRegister, setOpenModalRegister] = useState(false);
+  
   const { t, i18n } = useTranslation();
-  const [isRegisterModalVisible, SetIsRegisterModalVisible] = useState(false);
-  const modalRef = useRef(null);
+  const { notification } = useAppSelector(({ notification }) => notification);
 
-  const time: Date = new Date();
-  const currentYear = time.getFullYear();
+  const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
+  const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
 
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-    localStorage.setItem('selectedLanguage', language);
+
+  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
 
-  useClickAway(modalRef, () => {
-    SetIsRegisterModalVisible(false);
-  });
-
-  useEffect(() => {
-    const storedLang = localStorage.getItem('selectedLanguage');
-    if (storedLang) {
-      i18n.changeLanguage(storedLang, (err, t) => {
-        if (err) return console.log('Ошибка загрузки языка:', err);
-      });
-    } else {
-      i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);
-    }
-  }, []);
-
   return (
-    <div className="text-center">
-      <button onClick={() => changeLanguage(ApplicationLanguage.ENGLISH)}>EN</button>
-      <button onClick={() => changeLanguage(ApplicationLanguage.RUSSIAN)}>RU</button>
-      <hr />
-      <div>
-        <h1>{t('title')}</h1>
+    <div>
+      <div className="text-center">
+        <Typography variant="h5" marginBottom={2} component="h1">
+          {t('title')}
+        </Typography>
+        <Button variant="outlined" size="medium" onClick={handleToggleModalLogin}>
+          {t('buttonOpenModalLogin')}
+        </Button>
+        <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
+          {t('buttonOpenModalRegister')}
+        </Button>
       </div>
-      <Button variant="outlined" onClick={() => SetIsRegisterModalVisible(!isRegisterModalVisible)}>
-        {t('button')}
-      </Button>
-      <p>
-        {`${currentYear}`} || {t('footerText')}
-      </p>
-      {isRegisterModalVisible && (
-        <Modal>
-          <div className="flex justify-center items-center">
-            <div ref={modalRef} className="w-52 h-52 bg-white p-5">
-              <h1 className="text-center">{t('modalText')}</h1>
-            </div>
-          </div>
-        </Modal>
-      )}
+
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {notification.text}
+        </Alert>
+      </Snackbar>
+
+      <Modal
+        open={openModalRegister}
+        onClose={handleToggleModalRegister}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
+          <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
+            {t('registerTitle')}
+          </Typography>
+          <FormRegister setOpenSnackbar={setOpenSnackbar} />
+        </div>
+      </Modal>
+
+      <Modal
+        open={openModalLogin}
+        onClose={handleToggleModalLogin}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
+          <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
+            {t('loginTitle')}
+          </Typography>
+          <FormLogin />
+        </div>
+      </Modal>
     </div>
   );
 };
