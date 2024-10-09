@@ -15,20 +15,13 @@ import { registerUser } from '../../redux/user/userSlice';
 import FormHelperText from '@mui/material/FormHelperText';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { RegexConstants } from '../../lib/constans';
+import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
 
 interface Props {
-  setOpen: (str: boolean) => void;
+  setOpenSnackbar: (str: boolean) => void;
 }
 
-interface IFormInput {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
-
-export const FormRegister: FC<Props> = ({ setOpen }) => {
+export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
@@ -38,7 +31,7 @@ export const FormRegister: FC<Props> = ({ setOpen }) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IFormInput>({ mode: 'onBlur' });
+  } = useForm<FormInputRegister>({ mode: 'onBlur' });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowRepeatPassword = () => setShowRepeatPassword((show) => !show);
 
@@ -49,7 +42,7 @@ export const FormRegister: FC<Props> = ({ setOpen }) => {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<FormInputRegister> = (data) => {
     setIsLoadingButton(true);
     const body = {
       firstName: data.firstName,
@@ -64,8 +57,7 @@ export const FormRegister: FC<Props> = ({ setOpen }) => {
         localStorage.setItem('bearerToken', res.bearerToken);
       })
       .catch((err) => {
-        setOpen(true);
-        console.log('err', err);
+        setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };

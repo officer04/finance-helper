@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { MiddlewareActionError } from '../types/middleware-action-error';
-import { MiddlewareActionErrorType } from '../types/middleware-action-error-type';
+import { MiddlewareActionError } from '../types/shared/middleware-action-error';
+import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:5719',
@@ -8,18 +8,16 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log('Запрос:', config);
     return config;
   },
   (error) => {
-    console.error('Ошибка при выполнении запроса:', error);
+    console.error('Error was thrown while axios request performing', error);
     return Promise.reject(error);
   },
 );
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log('ответ', response);
     return response;
   },
   (error) => {

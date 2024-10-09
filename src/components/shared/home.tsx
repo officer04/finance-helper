@@ -17,26 +17,23 @@ interface Props {
 }
 
 export const Home: FC<Props> = ({ className }) => {
-  const { t, i18n } = useTranslation();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
+  
+  const { t, i18n } = useTranslation();
   const { notification } = useAppSelector(({ notification }) => notification);
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
 
-  const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setOpenSnackbar(false);
   };
 
   return (
@@ -53,9 +50,9 @@ export const Home: FC<Props> = ({ className }) => {
         </Button>
       </div>
 
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert
-          onClose={handleClose}
+          onClose={handleCloseSnackbar}
           severity="error"
           variant="filled"
           sx={{ width: '100%' }}
@@ -74,7 +71,7 @@ export const Home: FC<Props> = ({ className }) => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('registerTitle')}
           </Typography>
-          <FormRegister setOpen={setOpen} />
+          <FormRegister setOpenSnackbar={setOpenSnackbar} />
         </div>
       </Modal>
 

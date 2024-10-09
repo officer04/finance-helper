@@ -3,10 +3,6 @@
  */
 export type Notification = {
     /**
-   * Notification type
-   */
-  type: string;
-    /**
    * Notification text
    */
   text: string;

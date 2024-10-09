@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Notification } from '../../types/notification';
+import { Notification } from '../../types/redux/notification/notification';
 
 interface notificationState {
   notification: Notification;
 }
 
 const initialState: notificationState = {
-  notification: { type: '', text: '' },
+  notification: { text: '' },
 };
 
 export const notificationSlice = createSlice({

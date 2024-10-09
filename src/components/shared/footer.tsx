@@ -10,8 +10,7 @@ interface Props {
 export const Footer: FC<Props> = ({ className }) => {
   const { t, i18n } = useTranslation();
 
-  const time: Date = new Date();
-  const currentYear = time.getFullYear();
+  const currentYear = new Date().getFullYear();
   return (
     <footer className={cn('', className)}>
       <Typography variant="body1" component="p" align="center">

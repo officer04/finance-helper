@@ -8,6 +8,5 @@ interface Props {
 export const Header: FC<Props> = ({ className }) => {
   return <header className={cn('', className)}>
     header
-    <hr/>
   </header>;
 };

@@ -13,13 +13,10 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../redux/hooks';
 import { loginUser, registerUser } from '../../redux/user/userSlice';
 import FormHelperText from '@mui/material/FormHelperText';
+import { RegexConstants } from '../../lib/constans';
+import { FormInputLogin } from '../../types/ui/form-login/form-input-login';
 
 interface Props {}
-
-interface IFormInput {
-  email: string;
-  password: string;
-}
 
 export const FormLogin: FC<Props> = ({}) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +26,7 @@ export const FormLogin: FC<Props> = ({}) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IFormInput>({ mode: 'onBlur' });
+  } = useForm<FormInputLogin>({ mode: 'onBlur' });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +36,7 @@ export const FormLogin: FC<Props> = ({}) => {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<FormInputLogin> = (data) => {
     const body = {
       email: data.email,
       password: data.password,
@@ -56,7 +53,7 @@ export const FormLogin: FC<Props> = ({}) => {
           required: t('inputRequiredFields'),
           pattern: {
             value:
-              /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
+              RegexConstants.EMAIL,
             message: t('inputErrorEmail'),
           },
         })}
@@ -74,7 +71,7 @@ export const FormLogin: FC<Props> = ({}) => {
           {...register('password', {
             required: t('inputRequiredFields'),
             pattern: {
-              value: /^(?=.*\d)\w{4,32}$/m,
+              value: RegexConstants.PASSWORD,
               message: t('inputErrorPassword'),
             },
           })}
