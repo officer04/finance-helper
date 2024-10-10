@@ -36,12 +36,12 @@ export const Home: FC = () => {
   };
 
   return (
-    <div>
+    <div className='pr-2 pl-2'>
       <div className="text-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <Button variant="outlined" size="medium" onClick={handleToggleModalLogin}>
+        <Button variant="outlined" style={{marginBottom: "10px"}} size="medium" onClick={handleToggleModalLogin}>
           {t('buttonOpenModalLogin')}
         </Button>
         <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>

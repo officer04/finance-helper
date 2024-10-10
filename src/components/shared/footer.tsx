@@ -8,7 +8,7 @@ export const Footer: FC = () => {
 
   const currentYear = new Date().getFullYear();
   return (
-    <footer>
+    <footer className='p-2'>
       <Typography variant="body1" component="p" align="center">
         {`${currentYear}`} || {t('footerText')}
       </Typography>
