@@ -1,34 +1,33 @@
 import React from 'react';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import { useTranslation } from 'react-i18next';
 import { Alert } from '@mui/material';
-import { useAppSelector } from '../../redux/hooks';
 
+import { useAppSelector } from '../../redux/hooks';
 import { FormRegister } from './form-register';
 import { FormLogin } from './form-login';
 
-interface Props {
-  className?: string;
-}
 
-export const Home: FC<Props> = ({ className }) => {
+export const Home: FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
-  
+
   const { t, i18n } = useTranslation();
   const { notification } = useAppSelector(({ notification }) => notification);
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
 
-
-  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -37,12 +36,12 @@ export const Home: FC<Props> = ({ className }) => {
   };
 
   return (
-    <div>
+    <div className='pr-2 pl-2'>
       <div className="text-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <Button variant="outlined" size="medium" onClick={handleToggleModalLogin}>
+        <Button variant="outlined" style={{marginBottom: "10px"}} size="medium" onClick={handleToggleModalLogin}>
           {t('buttonOpenModalLogin')}
         </Button>
         <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
@@ -85,7 +84,7 @@ export const Home: FC<Props> = ({ className }) => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('loginTitle')}
           </Typography>
-          <FormLogin />
+          <FormLogin setOpenSnackbar={setOpenSnackbar} />
         </div>
       </Modal>
     </div>
