@@ -1,21 +1,22 @@
 import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Button from '@mui/material/Button';
-import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../redux/hooks';
-import { loginUser, registerUser } from '../../redux/user/userSlice';
 import FormHelperText from '@mui/material/FormHelperText';
-import { RegexConstants } from '../../lib/constans';
-import { FormInputLogin } from '../../types/ui/form-login/form-input-login';
 import LoadingButton from '@mui/lab/LoadingButton';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
+
+import { useAppDispatch } from '../../redux/hooks';
+import { loginUser } from '../../redux/user/userSlice';
+import { RegexConstants } from '../../lib/constants';
+import { FormInputLogin } from '../../types/ui/form-login/form-input-login';
 
 interface Props {
   setOpenSnackbar: (str: boolean) => void;
@@ -42,6 +43,7 @@ export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
     event.preventDefault();
   };
   const onSubmit: SubmitHandler<FormInputLogin> = (data) => {
+    setIsLoadingButton(true);
     const body = {
       email: data.email,
       password: data.password,

@@ -1,20 +1,21 @@
 import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Button from '@mui/material/Button';
-import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../redux/hooks';
-import { registerUser } from '../../redux/user/userSlice';
 import FormHelperText from '@mui/material/FormHelperText';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { RegexConstants } from '../../lib/constans';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import { useAppDispatch } from '../../redux/hooks';
+import { registerUser } from '../../redux/user/userSlice';
+import { RegexConstants } from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
 
 interface Props {

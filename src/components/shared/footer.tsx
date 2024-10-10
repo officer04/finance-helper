@@ -1,18 +1,14 @@
-import React, { FC } from 'react';
-import { cn } from '../../lib/utils';
-import Typography from '@mui/material/Typography';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
-  className?: string;
-}
+import Typography from '@mui/material/Typography';
 
-export const Footer: FC<Props> = ({ className }) => {
+export const Footer: FC = () => {
   const { t, i18n } = useTranslation();
 
   const currentYear = new Date().getFullYear();
   return (
-    <footer className={cn('', className)}>
+    <footer>
       <Typography variant="body1" component="p" align="center">
         {`${currentYear}`} || {t('footerText')}
       </Typography>

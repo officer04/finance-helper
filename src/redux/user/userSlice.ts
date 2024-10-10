@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../index';
-import { UserRegisterProps } from '../../types/api/user/register/user-register-props';
-import { UserRegisterResponse } from '../../types/api/user/register/user-register-response';
-import { UserLoginProps } from '../../types/api/user/login/user-login-props';
-import { UserLoginResponse } from '../../types/api/user/login/user-login-response';
+import { RegisterUserProps } from '../../types/api/user/register/register-user-props';
+import { RegisterUserResponse } from '../../types/api/user/register/register-user-response';
+import { LoginUserProps } from '../../types/api/user/login/login-user-props';
+import { LoginUserResponse } from '../../types/api/user/login/login-user-response';
 
 export const registerUser = createAsyncThunk(
   'users/registerUser',
-  async (body: UserRegisterProps, { rejectWithValue }) => {
+  async (body: RegisterUserProps, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post('/register', body);
-      return response.data as UserRegisterResponse;
+      return response.data as RegisterUserResponse;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error);
@@ -21,10 +21,10 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'users/registerUser',
-  async (body: UserLoginProps, { rejectWithValue }) => {
+  async (body: LoginUserProps, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post('/authorization/credentials', body);
-      return response.data as UserLoginResponse;
+      return response.data as LoginUserResponse;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error);
