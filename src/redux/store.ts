@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './user/userSlice';
-import notificationSlice from './user/notificationSlice';
+import notificationSlice from './notification/notificationSlice';
 import { notificationMiddleware } from '../middlewares/notification-middleware';
 
 export const store = configureStore({

@@ -14,7 +14,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 
 import { useAppDispatch } from '../../redux/hooks';
-import { loginUser } from '../../redux/user/userSlice';
+import { authorizationUser } from '../../redux/user/userSlice';
 import { RegexConstants } from '../../lib/constants';
 import { FormInputLogin } from '../../types/ui/form-login/form-input-login';
 
@@ -48,7 +48,7 @@ export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
       email: data.email,
       password: data.password,
     };
-    dispatch(loginUser(body))
+    dispatch(authorizationUser(body))
       .unwrap()
       .then((res) => {
         localStorage.setItem('bearerToken', res.bearerToken);

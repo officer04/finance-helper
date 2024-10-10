@@ -4,7 +4,7 @@ import {
   isMiddlewareActionError,
   MiddlewareActionError,
 } from '../types/shared/middleware-action-error';
-import { changeNotification } from '../redux/user/notificationSlice';
+import { changeNotification } from '../redux/notification/notificationSlice';
 import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
 
 export const notificationMiddleware: Middleware = (store) => (next) => (action) => {
