@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NotificationState } from '../../types/redux/notification/notificationState';
+import { NotificationState } from '../../types/redux/notification/notification-state';
 
 const initialState: NotificationState = {
   notification: { text: '' },

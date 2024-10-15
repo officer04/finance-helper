@@ -15,24 +15,26 @@ import Visibility from '@mui/icons-material/Visibility';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { authorizationUser } from '../../redux/user/userSlice';
-import { RegexConstants } from '../../lib/constants';
-import { FormInputLogin } from '../../types/ui/form-login/form-input-login';
+import { ApplicationRoutes, RegexConstants } from '../../lib/constants';
+import { FormInputAuthorization } from '../../types/ui/form-login/form-input-authorization';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setOpenSnackbar: (str: boolean) => void;
 }
 
-export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
+export const FormAuthorization: FC<Props> = ({ setOpenSnackbar }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
-
+  
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<FormInputLogin>({ mode: 'onBlur' });
+  } = useForm<FormInputAuthorization>({ mode: 'onBlur' });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +44,7 @@ export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-  const onSubmit: SubmitHandler<FormInputLogin> = (data) => {
+  const onSubmit: SubmitHandler<FormInputAuthorization> = (data) => {
     setIsLoadingButton(true);
     const body = {
       email: data.email,
@@ -52,14 +54,15 @@ export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
       .unwrap()
       .then((res) => {
         localStorage.setItem('bearerToken', res.bearerToken);
+        navigate(ApplicationRoutes.PROFILE)
       })
-      .catch((err) => {
+      .catch(() => {
         setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-center mb-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-3 text-center">
       <TextField
         error={!!errors?.email}
         {...register('email', {
@@ -120,7 +123,7 @@ export const FormLogin: FC<Props> = ({ setOpenSnackbar }) => {
           type="submit"
           size="large"
         >
-          {t('buttonRegister')}
+          {t('buttonAuthorization')}
         </LoadingButton>
       </div>
     </form>

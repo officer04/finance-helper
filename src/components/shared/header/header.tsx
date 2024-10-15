@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { HeaderBase } from "./header-base";
-import { HeaderAuth } from "./header-auth";
+import { HeaderBase } from './header-base';
+import { HeaderAuth } from './header-auth';
+import { useAppSelector } from '../../../redux/hooks';
 
 export const Header: FC = () => {
-  const isAuth = false;
+  const { isAuth } = useAppSelector(({ user }) => user);
   const getHeader = () => {
     if (!isAuth) {
       return <HeaderBase />;
@@ -15,5 +16,3 @@ export const Header: FC = () => {
 
   return getHeader();
 };
-
-

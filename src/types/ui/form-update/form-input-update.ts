@@ -1,7 +1,6 @@
-export interface UserMeResponse {
-  id: string;
-  email: string;
+export interface FormInputUpdate {
   firstName: string;
   lastName: string;
+  email: string;
   preferredLocalizationCode: string
 }

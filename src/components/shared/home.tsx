@@ -10,8 +10,7 @@ import { Alert } from '@mui/material';
 
 import { useAppSelector } from '../../redux/hooks';
 import { FormRegister } from './form-register';
-import { FormLogin } from './form-login';
-
+import { FormAuthorization } from './form-authorization';
 
 export const Home: FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -36,12 +35,17 @@ export const Home: FC = () => {
   };
 
   return (
-    <div className='pr-2 pl-2'>
+    <div className="pr-2 pl-2">
       <div className="text-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <Button variant="outlined" style={{marginBottom: "10px"}} size="medium" onClick={handleToggleModalLogin}>
+        <Button
+          variant="outlined"
+          style={{ marginBottom: '10px' }}
+          size="medium"
+          onClick={handleToggleModalLogin}
+        >
           {t('buttonOpenModalLogin')}
         </Button>
         <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
@@ -84,7 +88,7 @@ export const Home: FC = () => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('loginTitle')}
           </Typography>
-          <FormLogin setOpenSnackbar={setOpenSnackbar} />
+          <FormAuthorization setOpenSnackbar={setOpenSnackbar} />
         </div>
       </Modal>
     </div>

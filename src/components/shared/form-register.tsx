@@ -15,8 +15,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
-import { RegexConstants } from '../../lib/constants';
+import { ApplicationRoutes, RegexConstants } from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setOpenSnackbar: (str: boolean) => void;
@@ -26,6 +27,8 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
+
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
   const {
@@ -55,14 +58,16 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
       .unwrap()
       .then((res) => {
         localStorage.setItem('bearerToken', res.bearerToken);
+        console.log("назай") 
+        navigate(ApplicationRoutes.PROFILE);
       })
-      .catch((err) => {
+      .catch(() => {
         setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-center mb-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-3 text-center">
       <TextField
         error={!!errors?.firstName}
         {...register('firstName', {

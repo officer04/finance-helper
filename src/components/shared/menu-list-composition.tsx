@@ -4,15 +4,14 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { ApplicationRoutes } from '../../lib/constants';
 
-
-const options = [
-  "Профиль"
-];
+const options = [{link: ApplicationRoutes.PROFILE, name: "Профиль"}];
 
 const ITEM_HEIGHT = 25;
 
-export const  MenuListComposition: FC = () => {
+export const MenuListComposition: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -52,11 +51,11 @@ export const  MenuListComposition: FC = () => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
+          <MenuItem key={option.name} selected={option.name === 'Pyxis'} onClick={handleClose}>
+            <Link to={option.link}>{option.name}</Link>
           </MenuItem>
         ))}
       </Menu>
     </div>
   );
-}
+};
