@@ -1,10 +1,20 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Footer, Header, Home } from './shared';
-import { Route, Routes } from 'react-router-dom';
-import { ProfileUser } from './shared/profile-user';
 import { AppRoutes } from '../routes/app-routes';
+import i18n from '../i18n';
+import { DefaultApplicationLanguage } from '../lib/constants';
 
 const App: FC = () => {
+  useEffect(() => {
+    const storedLang = localStorage.getItem('selectedLanguage');
+    if (storedLang) {
+      i18n.changeLanguage(storedLang, (err, t) => {
+        if (err) return console.log('Ошибка загрузки языка:', err);
+      });
+    } else {
+      i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);
+    }
+  }, []);
   return (
     <div className="flex flex-col items-center justify-between h-screen">
       <Header />

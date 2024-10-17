@@ -10,7 +10,7 @@ export const DefaultApplicationLanguage = {
 export const RegexConstants = {
   EMAIL:
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
-  PASSWORD: /^[A-Za-z0-9!@#$%\^\&*\)\(+=._-]{2,32}$/,
+  PASSWORD: /^[A-Za-z0-9!@#$%\^\&*\)\(+=._-]{4,32}$/,
 };
 
 export const ApplicationRoutes = {

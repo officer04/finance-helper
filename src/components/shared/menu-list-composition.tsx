@@ -6,13 +6,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ApplicationRoutes } from '../../lib/constants';
+import { useTranslation } from 'react-i18next';
 
-const options = [{link: ApplicationRoutes.PROFILE, name: "Профиль"}];
 
 const ITEM_HEIGHT = 25;
 
 export const MenuListComposition: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { t, i18n } = useTranslation();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -21,6 +22,8 @@ export const MenuListComposition: FC = () => {
     setAnchorEl(null);
   };
 
+  const options = [{link: ApplicationRoutes.PROFILE, name: "Профиль"}];
+  
   return (
     <div>
       <IconButton
@@ -51,7 +54,7 @@ export const MenuListComposition: FC = () => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option.name} selected={option.name === 'Pyxis'} onClick={handleClose}>
+          <MenuItem key={option.link} selected={option.name === 'Pyxis'} onClick={handleClose}>
             <Link to={option.link}>{option.name}</Link>
           </MenuItem>
         ))}

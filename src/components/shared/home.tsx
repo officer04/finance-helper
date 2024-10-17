@@ -11,6 +11,12 @@ import { Alert } from '@mui/material';
 import { useAppSelector } from '../../redux/hooks';
 import { FormRegister } from './form-register';
 import { FormAuthorization } from './form-authorization';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+}
 
 export const Home: FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -22,7 +28,10 @@ export const Home: FC = () => {
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
-
+  const { control, handleSubmit } = useForm<FormData>();
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+  };
   const handleCloseSnackbar = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
@@ -35,25 +44,27 @@ export const Home: FC = () => {
   };
 
   return (
-    <div className="pr-2 pl-2">
+    <div className="pl-2 pr-2">
       <div className="text-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <Button
-          variant="outlined"
-          style={{ marginBottom: '10px' }}
-          size="medium"
-          onClick={handleToggleModalLogin}
-        >
-          {t('buttonOpenModalLogin')}
-        </Button>
-        <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
-          {t('buttonOpenModalRegister')}
-        </Button>
+        <div className='flex flex-col w-50'>
+          <Button
+            variant="outlined"
+            style={{ marginBottom: '10px' }}
+            size="medium"
+            onClick={handleToggleModalLogin}
+          >
+            {t('buttonOpenModalLogin')}
+          </Button>
+          <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
+            {t('buttonOpenModalRegister')}
+          </Button>
+        </div>
       </div>
 
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+      <Snackbar open={openSnackbar} autoHideDuration={2000} onClose={handleCloseSnackbar}>
         <Alert
           onClose={handleCloseSnackbar}
           severity="error"
