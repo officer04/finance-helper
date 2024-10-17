@@ -1,16 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../index';
-import { UserRegisterProps } from '../../types/api/user-register/user-register-props';
-import { UserRegisterResponse } from '../../types/api/user-register/user-register-response';
-import { UserLoginProps } from '../../types/api/user-login/user-login-props';
+import { RegisterUserBody } from '../../types/api/register/body';
+import { RegisterUserResponse } from '../../types/api/register/response';
+import { AuthorizationUserBody } from '../../types/api/authorization/body';
+import { AuthorizationUserResponse } from '../../types/api/authorization/response';
+import { UserMeResponse } from '../../types/api/user/get-me/response';
+import { UpdateUserMeBody } from '../../types/api/user/update-me/body';
+import { UpdateUserMeResponse } from '../../types/api/user/update-me/response';
+import { UserState } from '../../types/redux/user/user-state';
 
 export const registerUser = createAsyncThunk(
   'users/registerUser',
-  async (body: UserRegisterProps, { rejectWithValue }) => {
+  async (body: RegisterUserBody, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post('/register', body);
-      return response.data as UserRegisterResponse;
+      return response.data as RegisterUserResponse;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error);
@@ -18,20 +23,58 @@ export const registerUser = createAsyncThunk(
   },
 );
 
-export const loginUser = createAsyncThunk(
-  'users/registerUser',
-  async (body: UserLoginProps, thunkAPI) => {
-    const response = await axiosInstance.post('/authorization/credentials', body);
-    return response;
+export const authorizationUser = createAsyncThunk(
+  'users/authorizationUser',
+  async (body: AuthorizationUserBody, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post('/authorization/credentials', body);
+      return response.data as AuthorizationUserResponse;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
   },
 );
 
-const initialState = {};
+export const getUserMe = createAsyncThunk('users/getUserMe', async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get('/user/me');
+    return response.data as UserMeResponse;
+  } catch (error) {
+    console.error(error);
+    return rejectWithValue(error);
+  }
+});
+
+export const updateUserMe = createAsyncThunk(
+  'users/updateUserMe',
+  async (body: UpdateUserMeBody, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put('/user/me', body);
+      return response.data as UpdateUserMeResponse;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
+const initialState: UserState = {
+  isAuth: !!localStorage.getItem('bearerToken'),
+};
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(authorizationUser.fulfilled, (state) => {
+      state.isAuth = true;
+    });
+    builder.addCase(registerUser.fulfilled, (state) => {
+      state.isAuth = true;
+    });
+  },
 });
 
 export const {} = userSlice.actions;

@@ -1,47 +1,32 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Button from '@mui/material/Button';
 import { useTranslation } from 'react-i18next';
+
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
-import FormHelperText from '@mui/material/FormHelperText';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { RegexConstants } from '../../lib/constans';
+import { ApplicationRoutes} from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
+import { useNavigate } from 'react-router-dom';
+import InputText from './input-text';
+import InputPassword from './input-password';
 
 interface Props {
   setOpenSnackbar: (str: boolean) => void;
 }
 
 export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
+
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { t, i18n } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<FormInputRegister>({ mode: 'onBlur' });
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleClickShowRepeatPassword = () => setShowRepeatPassword((show) => !show);
+  const { t } = useTranslation();
+  const { handleSubmit, control } = useForm<FormInputRegister>({
+    mode: 'onSubmit',
+    defaultValues: { firstName: '', lastName: '', email: '', password: '', repeatPassword: '' },
+  });
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
   const onSubmit: SubmitHandler<FormInputRegister> = (data) => {
     setIsLoadingButton(true);
     const body = {
@@ -54,141 +39,103 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
       .unwrap()
       .then((res) => {
         localStorage.setItem('bearerToken', res.bearerToken);
+        navigate(ApplicationRoutes.PROFILE);
       })
-      .catch((err) => {
+      .catch(() => {
         setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-center mb-3">
-      <TextField
-        error={!!errors?.firstName}
-        {...register('firstName', {
+    <form className="mb-3 text-center" onSubmit={handleSubmit(onSubmit)}>
+      <InputText
+        control={control}
+        name="firstName"
+        label={t('inputFirstName')}
+        rules={{
           required: t('inputRequiredFields'),
           minLength: {
             value: 2,
-            message: t('inputErrorLastName'),
+            message: t('inputErrorFirstName'),
           },
           maxLength: {
             value: 32,
-            message: t('inputErrorLastName'),
+            message: t('inputErrorFirstName'),
           },
-        })}
+        }}
         style={{ width: '300px' }}
-        helperText={errors?.firstName?.message}
-        id="outlined-number"
-        label={t('inputNameUser')}
         margin="dense"
       />
-      <TextField
-        error={!!errors?.lastName}
-        {...register('lastName', {
-          required: t('inputRequiredFields'),
-          minLength: {
-            value: 2,
-            message: t('inputErrorLastName'),
-          },
-          maxLength: {
-            value: 32,
-            message: t('inputErrorLastName'),
-          },
-        })}
-        style={{ width: '300px' }}
-        id="outlined-error"
+      <InputText
+        control={control}
+        name="lastName"
         label={t('inputLastNameUser')}
-        helperText={errors?.lastName?.message}
+        rules={{
+          required: t('inputRequiredFields'),
+          minLength: {
+            value: 2,
+            message: t('inputErrorLastName'),
+          },
+          maxLength: {
+            value: 32,
+            message: t('inputErrorLastName'),
+          },
+        }}
+        style={{ width: '300px' }}
         margin="dense"
       />
-      <TextField
-        error={!!errors?.email}
-        {...register('email', {
+      <InputText
+        control={control}
+        name="email"
+        label={t('inputEmailUser')}
+        rules={{
           required: t('inputRequiredFields'),
-          pattern: {
-            value: RegexConstants.EMAIL,
+          minLength: {
+            value: 2,
             message: t('inputErrorEmail'),
           },
-        })}
+          maxLength: {
+            value: 32,
+            message: t('inputErrorEmail'),
+          },
+        }}
         style={{ width: '300px' }}
-        id="outlined-error"
-        label={t('inputEmailUser')}
-        helperText={errors?.email?.message}
         margin="dense"
       />
-      <FormControl
-        error={!!errors?.password}
+      <InputPassword
+        control={control}
+        name="password"
+        label={t('inputPasswordUser')}
+        rules={{
+          required: t('inputRequiredFields'),
+          minLength: {
+            value: 2,
+            message: t('inputErrorPassword'),
+          },
+          maxLength: {
+            value: 32,
+            message: t('inputErrorPassword'),
+          },
+        }}
         style={{ width: '300px' }}
-        sx={{ m: 1, width: '25ch' }}
-        variant="outlined"
-      >
-        <InputLabel htmlFor="outlined-adornment-password">{t('inputPasswordUser')}</InputLabel>
-
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          {...register('password', {
-            required: t('inputRequiredFields'),
-            pattern: {
-              value: RegexConstants.PASSWORD,
-              message: t('inputErrorPassword'),
-            },
-          })}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                onMouseUp={handleMouseUpPassword}
-                edge="end"
-              >
-                {!showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="Password"
-        />
-        <FormHelperText id="component-error-text">{errors?.password?.message}</FormHelperText>
-      </FormControl>
-      <FormControl
-        error={!!errors?.repeatPassword}
-        style={{ width: '300px' }}
-        sx={{ m: 1, width: '25ch' }}
-        variant="outlined"
-      >
-        <InputLabel htmlFor="outlined-adornment-password">
-          {t('inputRepeatPasswordUser')}
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showRepeatPassword ? 'text' : 'password'}
-          {...register('repeatPassword', {
-            required: t('inputRequiredFields'),
-            validate: (value, formValues) =>
-              value === formValues.password || t('inputErrorRepeatPassword'),
-          })}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowRepeatPassword}
-                onMouseDown={handleMouseDownPassword}
-                onMouseUp={handleMouseUpPassword}
-                edge="end"
-              >
-                {!showRepeatPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="RepeatPassword"
-        />
-        <FormHelperText id="component-error-text">{errors?.repeatPassword?.message}</FormHelperText>
-      </FormControl>
+        margin="dense"
+      />
+      <InputPassword
+        control={control}
+        name="repeatPassword"
+        label={t('inputRepeatPasswordUser')}
+        rules={{
+          required: t('inputRequiredFields'),
+          validate: (value, formValues) =>
+            value === formValues.password || t('inputErrorRepeatPassword'),
+        }}
+        style={{ width: '300px', marginBottom: '10px' }}
+        margin="dense"
+      />
       <div className="text-center">
         <LoadingButton
           loading={isLoadingButton}
           variant="outlined"
-          disabled={!isValid}
           style={{ width: '300px' }}
           type="submit"
           size="large"

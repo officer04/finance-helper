@@ -1,24 +1,25 @@
 {
   "title": "Привет, это Finance-Helper!" ,
-  "description": {
-  },
   "buttonOpenModalLogin": "Открыть панель управления",
   "buttonOpenModalRegister": "Получить доступ",
   "footerText": "Всё права защищены",
   "modalText": "Ещё в разработке",
-  "inputNameUser": "Имя",
+  "inputFirstName": "Имя",
   "inputLastNameUser": "Фамилия",
   "inputEmailUser": "Почта",
   "inputPasswordUser": "Пароль",
+  "inputSupportedLanguages": "Языки",
   "inputRepeatPasswordUser": "Повтор пароля",
   "buttonRegister": "Зарегистрироваться",
   "registerTitle": "Регистрация",
-  "buttonLogin": "Войти",
+  "buttonAuthorization": "Войти",
   "loginTitle": "Авторизация",
   "inputRequiredFields": "Поля обязательное к заполнению",
   "inputErrorEmail": "Почта указана неверно",
   "inputErrorLastName": "Фамилия должна состоять из латинских букв от 2 до 32 символов",
   "inputErrorFirstName": "Имя должна состоять из латинских букв от 2 до 32 символов",
   "inputErrorPassword": "Пароль должен состоять из латинских букв и цифр длина от 4 до 32 символов",
-  "inputErrorRepeatPassword": "Пароли не совпадают"
+  "inputErrorRepeatPassword": "Пароли не совпадают",
+  "titleProfileUser": "Профиль",
+  "buttonUpdate": "Сохранить"
 }

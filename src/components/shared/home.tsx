@@ -1,34 +1,38 @@
 import React from 'react';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import { useTranslation } from 'react-i18next';
 import { Alert } from '@mui/material';
+
 import { useAppSelector } from '../../redux/hooks';
-
 import { FormRegister } from './form-register';
-import { FormLogin } from './form-login';
+import { FormAuthorization } from './form-authorization';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-interface Props {
-  className?: string;
+interface FormData {
+  firstName: string;
+  lastName: string;
 }
 
-export const Home: FC<Props> = ({ className }) => {
+export const Home: FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
-  
-  const { t, i18n } = useTranslation();
+
+  const { t } = useTranslation();
   const { notification } = useAppSelector(({ notification }) => notification);
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
-
-
-  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+  
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -37,20 +41,27 @@ export const Home: FC<Props> = ({ className }) => {
   };
 
   return (
-    <div>
+    <div className="pl-2 pr-2">
       <div className="text-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <Button variant="outlined" size="medium" onClick={handleToggleModalLogin}>
-          {t('buttonOpenModalLogin')}
-        </Button>
-        <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
-          {t('buttonOpenModalRegister')}
-        </Button>
+        <div className='flex flex-col w-50'>
+          <Button
+            variant="outlined"
+            style={{ marginBottom: '10px' }}
+            size="medium"
+            onClick={handleToggleModalLogin}
+          >
+            {t('buttonOpenModalLogin')}
+          </Button>
+          <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
+            {t('buttonOpenModalRegister')}
+          </Button>
+        </div>
       </div>
 
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+      <Snackbar open={openSnackbar} autoHideDuration={2000} onClose={handleCloseSnackbar}>
         <Alert
           onClose={handleCloseSnackbar}
           severity="error"
@@ -85,7 +96,7 @@ export const Home: FC<Props> = ({ className }) => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('loginTitle')}
           </Typography>
-          <FormLogin />
+          <FormAuthorization setOpenSnackbar={setOpenSnackbar} />
         </div>
       </Modal>
     </div>

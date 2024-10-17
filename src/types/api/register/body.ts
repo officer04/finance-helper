@@ -1,4 +1,4 @@
-export interface UserRegisterProps {
+export interface RegisterUserBody {
   firstName: string;
   lastName: string;
   email: string;
