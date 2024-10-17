@@ -1,26 +1,25 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getUserMe, registerUser, updateUserMe } from '../../redux/user/userSlice';
+import { getUserMe, updateUserMe } from '../../redux/user/userSlice';
 import { RegexConstants } from '../../lib/constants';
-import { FormInputUpdate } from '../../types/ui/form-update/form-input-update';
-import MenuItem from '@mui/material/MenuItem';
+import { FormInputUpdateUser } from '../../types/ui/form-update-user/form-input-update-user';
 import { getSupportedLanguages } from '../../redux/supported-languages/supportedLanguagesSlice';
 import InputText from './input-text';
 import InputSelect from './input-select';
 
 interface Props {}
 
-export const FormUpdate: FC<Props> = () => {
+export const FormUpdateUser: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
-  
+
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const { supportedLanguages } = useAppSelector(({ supportedLanguages }) => supportedLanguages);
- 
-  const { handleSubmit, control, setValue } = useForm<FormInputUpdate>({
+
+  const { handleSubmit, control, setValue } = useForm<FormInputUpdateUser>({
     mode: 'onSubmit',
     defaultValues: {
       firstName: '',
@@ -43,7 +42,7 @@ export const FormUpdate: FC<Props> = () => {
     });
   }, []);
 
-  const onSubmit: SubmitHandler<FormInputUpdate> = (data) => {
+  const onSubmit: SubmitHandler<FormInputUpdateUser> = (data) => {
     setIsLoadingButton(true);
     const body = {
       firstName: data.firstName,

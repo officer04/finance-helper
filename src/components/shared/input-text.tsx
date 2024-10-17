@@ -1,13 +1,8 @@
-import React from 'react';
 import { Controller,FieldValues} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
-import { BaseInputProps } from '../../types/ui/input-text/base-input-props';
+import { BaseInputProps } from '../../types/shared/base-input-props';
 
-/**
- * Пропсы для TextField
- */
 interface InputTextProps<T extends FieldValues> extends BaseInputProps<T> {
-  style?: React.CSSProperties;
 }
 
 export default function InputText<T extends FieldValues>({

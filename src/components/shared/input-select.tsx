@@ -4,15 +4,11 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { SelectItem } from '../../types/ui/input-select.ts/select-item';
-import { BaseInputSelectProps } from '../../types/ui/input-select.ts/base-input-select-props';
+import { SelectItem } from '../../types/ui/input-select/select-item';
+import { BaseInputProps } from '../../types/shared/base-input-props';
 
-/**
- * Пропсы для Select
- */
-interface InputSelectProps<T extends FieldValues> extends BaseInputSelectProps<T> {
+interface InputSelectProps<T extends FieldValues> extends BaseInputProps<T> {
   items: SelectItem[];
-  style?: React.CSSProperties;
 }
 
 export default function InputSelect<T extends FieldValues>({
@@ -31,7 +27,7 @@ export default function InputSelect<T extends FieldValues>({
         name={name}
         control={control}
         rules={rules}
-        render={({ field, fieldState }) => (
+        render={({ field }) => (
           <Select label={label} labelId="level-label" {...field}>
             {items.map((item) => (
               <MenuItem key={item.key} value={item.key}>

@@ -9,7 +9,7 @@ const App: FC = () => {
     const storedLang = localStorage.getItem('selectedLanguage');
     if (storedLang) {
       i18n.changeLanguage(storedLang, (err, t) => {
-        if (err) return console.log('Ошибка загрузки языка:', err);
+        if (err) return console.log('Error loading language:', err);
       });
     } else {
       i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);

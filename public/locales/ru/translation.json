@@ -1,7 +1,5 @@
 {
   "title": "Привет, это Finance-Helper!" ,
-  "description": {
-  },
   "buttonOpenModalLogin": "Открыть панель управления",
   "buttonOpenModalRegister": "Получить доступ",
   "footerText": "Всё права защищены",

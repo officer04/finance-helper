@@ -6,7 +6,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
-import { ApplicationRoutes, RegexConstants } from '../../lib/constants';
+import { ApplicationRoutes} from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
 import { useNavigate } from 'react-router-dom';
 import InputText from './input-text';
@@ -21,7 +21,7 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { handleSubmit, control } = useForm<FormInputRegister>({
     mode: 'onSubmit',
     defaultValues: { firstName: '', lastName: '', email: '', password: '', repeatPassword: '' },

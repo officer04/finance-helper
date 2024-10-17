@@ -23,15 +23,12 @@ export const Home: FC = () => {
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { notification } = useAppSelector(({ notification }) => notification);
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
-  const { control, handleSubmit } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-  };
+  
   const handleCloseSnackbar = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,

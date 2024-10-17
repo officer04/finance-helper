@@ -19,7 +19,7 @@ export const FormAuthorization: FC<Props> = ({ setOpenSnackbar }) => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
   const {
     handleSubmit,
     control,

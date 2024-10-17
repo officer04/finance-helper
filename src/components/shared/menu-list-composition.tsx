@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom';
 import { ApplicationRoutes } from '../../lib/constants';
 import { useTranslation } from 'react-i18next';
 
-
 const ITEM_HEIGHT = 25;
 
 export const MenuListComposition: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,8 +21,8 @@ export const MenuListComposition: FC = () => {
     setAnchorEl(null);
   };
 
-  const options = [{link: ApplicationRoutes.PROFILE, name: "Профиль"}];
-  
+  const options = [{ link: ApplicationRoutes.PROFILE, name: t('titleProfileUser') }];
+
   return (
     <div>
       <IconButton
@@ -54,7 +53,7 @@ export const MenuListComposition: FC = () => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option.link} selected={option.name === 'Pyxis'} onClick={handleClose}>
+          <MenuItem key={option.link} onClick={handleClose}>
             <Link to={option.link}>{option.name}</Link>
           </MenuItem>
         ))}

@@ -5,14 +5,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-import { BaseInputProps } from '../../types/ui/input-password/base-input-props';
+import { BaseInputProps } from '../../types/shared/base-input-props';
 
-/**
- * Пропсы для TextField
- */
-interface InputPasswordProps<T extends FieldValues> extends BaseInputProps<T> {
-  style?: React.CSSProperties;
-}
+interface InputPasswordProps<T extends FieldValues> extends BaseInputProps<T> {}
 
 export default function InputPassword<T extends FieldValues>({
   control,
