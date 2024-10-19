@@ -10,21 +10,16 @@ import { useNavigate } from 'react-router-dom';
 import InputText from './input-text';
 import InputPassword from './input-password';
 
-interface Props {
-  setOpenSnackbar: (str: boolean) => void;
-}
+interface Props {}
 
-export const FormAuthorization: FC<Props> = ({ setOpenSnackbar }) => {
+export const FormAuthorization: FC<Props> = () => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { t} = useTranslation();
-  const {
-    handleSubmit,
-    control,
-  } = useForm<FormInputAuthorization>({
-    mode: "onSubmit",
+  const { t } = useTranslation();
+  const { handleSubmit, control } = useForm<FormInputAuthorization>({
+    mode: 'onSubmit',
     defaultValues: { email: '', password: '' },
   });
 
@@ -41,7 +36,6 @@ export const FormAuthorization: FC<Props> = ({ setOpenSnackbar }) => {
         navigate(ApplicationRoutes.PROFILE);
       })
       .catch(() => {
-        setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };
@@ -72,7 +66,7 @@ export const FormAuthorization: FC<Props> = ({ setOpenSnackbar }) => {
             message: t('inputErrorPassword'),
           },
         }}
-        style={{ width: '300px', marginBottom: "10px" }}
+        style={{ width: '300px', marginBottom: '10px' }}
         margin="dense"
       />
       <div className="text-center">

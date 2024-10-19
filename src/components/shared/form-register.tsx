@@ -6,17 +6,15 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
-import { ApplicationRoutes} from '../../lib/constants';
+import { ApplicationRoutes } from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
 import { useNavigate } from 'react-router-dom';
 import InputText from './input-text';
 import InputPassword from './input-password';
 
-interface Props {
-  setOpenSnackbar: (str: boolean) => void;
-}
+interface Props {}
 
-export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
+export const FormRegister: FC<Props> = () => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
 
   const navigate = useNavigate();
@@ -42,7 +40,6 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
         navigate(ApplicationRoutes.PROFILE);
       })
       .catch(() => {
-        setOpenSnackbar(true);
       })
       .finally(() => setIsLoadingButton(false));
   };
@@ -51,7 +48,7 @@ export const FormRegister: FC<Props> = ({ setOpenSnackbar }) => {
       <InputText
         control={control}
         name="firstName"
-        label={t('inputFirstName')}
+        label={t('inputFirstNameUser')}
         rules={{
           required: t('inputRequiredFields'),
           minLength: {

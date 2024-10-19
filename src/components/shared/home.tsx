@@ -11,12 +11,6 @@ import { Alert } from '@mui/material';
 import { useAppSelector } from '../../redux/hooks';
 import { FormRegister } from './form-register';
 import { FormAuthorization } from './form-authorization';
-import { SubmitHandler, useForm } from 'react-hook-form';
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-}
 
 export const Home: FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -61,16 +55,16 @@ export const Home: FC = () => {
         </div>
       </div>
 
-      <Snackbar open={openSnackbar} autoHideDuration={2000} onClose={handleCloseSnackbar}>
+      {/* <Snackbar open={openSnackbar} autoHideDuration={2000} onClose={handleCloseSnackbar}>
         <Alert
           onClose={handleCloseSnackbar}
-          severity="error"
+          severity={notification.infoNotification}
           variant="filled"
           sx={{ width: '100%' }}
         >
           {notification.text}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
 
       <Modal
         open={openModalRegister}
@@ -82,7 +76,7 @@ export const Home: FC = () => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('registerTitle')}
           </Typography>
-          <FormRegister setOpenSnackbar={setOpenSnackbar} />
+          <FormRegister/>
         </div>
       </Modal>
 
@@ -96,7 +90,7 @@ export const Home: FC = () => {
           <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
             {t('loginTitle')}
           </Typography>
-          <FormAuthorization setOpenSnackbar={setOpenSnackbar} />
+          <FormAuthorization/>
         </div>
       </Modal>
     </div>

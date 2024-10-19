@@ -4,7 +4,7 @@
   "buttonOpenModalRegister": "Получить доступ",
   "footerText": "Всё права защищены",
   "modalText": "Ещё в разработке",
-  "inputFirstName": "Имя",
+  "inputFirstNameUser": "Имя",
   "inputLastNameUser": "Фамилия",
   "inputEmailUser": "Почта",
   "inputPasswordUser": "Пароль",

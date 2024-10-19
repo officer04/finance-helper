@@ -9,6 +9,8 @@ import { FormInputUpdateUser } from '../../types/ui/form-update-user/form-input-
 import { getSupportedLanguages } from '../../redux/supported-languages/supportedLanguagesSlice';
 import InputText from './input-text';
 import InputSelect from './input-select';
+import { changeNotification } from '../../redux/notification/notificationSlice';
+import { SnackbarInfoNotificationType } from '../../types/ui/snackbar/snackbar-info-notification-type';
 
 interface Props {}
 
@@ -56,16 +58,27 @@ export const FormUpdateUser: FC<Props> = () => {
         localStorage.setItem('bearerToken', res.bearerToken);
         i18n.changeLanguage(data.preferredLocalization);
         localStorage.setItem('selectedLanguage', data.preferredLocalization);
+        dispatch(
+          data.preferredLocalization === 'ru'
+            ? changeNotification({
+                infoNotification: SnackbarInfoNotificationType.InfoSuccess,
+                text: 'Пользователь успешно обновлен',
+              })
+            : changeNotification({
+                infoNotification: SnackbarInfoNotificationType.InfoSuccess,
+                text: 'The user has been successfully updated',
+              }),
+        );
       })
       .catch(() => {})
       .finally(() => setIsLoadingButton(false));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center ">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
       <InputText
         control={control}
         name="firstName"
-        label={t('inputFirstName')}
+        label={t('inputFirstNameUser')}
         rules={{
           required: t('inputRequiredFields'),
           minLength: {
@@ -83,7 +96,7 @@ export const FormUpdateUser: FC<Props> = () => {
       <InputText
         control={control}
         name="lastName"
-        label={t('inputFirstName')}
+        label={t('inputLastNameUser')}
         rules={{
           required: t('inputRequiredFields'),
           minLength: {

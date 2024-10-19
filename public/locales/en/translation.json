@@ -5,7 +5,7 @@
   "buttonOpenModalLogin": "Open dashboard",
   "footerText": "All rights reserved",
   "modalText": "Coming Soon",
-  "inputFirstName": "Name",
+  "inputFirstNameUser": "First Name",
   "inputLastNameUser": "Last Name",
   "inputEmailUser": "Email",
   "inputPasswordUser": "Password",
