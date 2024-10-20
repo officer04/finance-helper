@@ -22,5 +22,6 @@
   "inputErrorPassword": "The password must consist of Latin letters and numbers from 4 to 32 characters in length",
   "inputErrorRepeatPassword": "Must be equal password field",
   "titleProfileUser": "Profile",
-  "buttonUpdate": "Save"
+  "buttonUpdate": "Save",
+  "textNotificationUpdateProfile": "The user has been successfully updated"
 }

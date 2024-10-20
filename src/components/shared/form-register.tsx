@@ -39,8 +39,7 @@ export const FormRegister: FC<Props> = () => {
         localStorage.setItem('bearerToken', res.bearerToken);
         navigate(ApplicationRoutes.PROFILE);
       })
-      .catch(() => {
-      })
+      .catch(() => {})
       .finally(() => setIsLoadingButton(false));
   };
   return (

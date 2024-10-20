@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getUserMe, updateUserMe } from '../../redux/user/userSlice';
-import { RegexConstants } from '../../lib/constants';
+import { ApplicationLanguage, RegexConstants } from '../../lib/constants';
 import { FormInputUpdateUser } from '../../types/ui/form-update-user/form-input-update-user';
 import { getSupportedLanguages } from '../../redux/supported-languages/supportedLanguagesSlice';
 import InputText from './input-text';
 import InputSelect from './input-select';
 import { changeNotification } from '../../redux/notification/notificationSlice';
-import { SnackbarInfoNotificationType } from '../../types/ui/snackbar/snackbar-info-notification-type';
+import { NotificationType } from '../../types/ui/snackbar/notification-type';
 
 interface Props {}
 
@@ -40,7 +40,7 @@ export const FormUpdateUser: FC<Props> = () => {
           setValue('lastName', res.lastName);
           setValue('email', res.email);
           setValue('preferredLocalization', res.preferredLocalizationCode);
-        });
+        }).catch(() => {})
     });
   }, []);
 
@@ -59,15 +59,10 @@ export const FormUpdateUser: FC<Props> = () => {
         i18n.changeLanguage(data.preferredLocalization);
         localStorage.setItem('selectedLanguage', data.preferredLocalization);
         dispatch(
-          data.preferredLocalization === 'ru'
-            ? changeNotification({
-                infoNotification: SnackbarInfoNotificationType.InfoSuccess,
-                text: 'Пользователь успешно обновлен',
-              })
-            : changeNotification({
-                infoNotification: SnackbarInfoNotificationType.InfoSuccess,
-                text: 'The user has been successfully updated',
-              }),
+          changeNotification({
+            infoNotification: NotificationType.InfoSuccess,
+            text: t('textNotificationUpdateProfile'),
+          }),
         );
       })
       .catch(() => {})

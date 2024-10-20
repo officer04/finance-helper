@@ -21,5 +21,6 @@
   "inputErrorPassword": "Пароль должен состоять из латинских букв и цифр длина от 4 до 32 символов",
   "inputErrorRepeatPassword": "Пароли не совпадают",
   "titleProfileUser": "Профиль",
-  "buttonUpdate": "Сохранить"
+  "buttonUpdate": "Сохранить",
+  "textNotificationUpdateProfile": "Пользователь успешно обновлен"
 }

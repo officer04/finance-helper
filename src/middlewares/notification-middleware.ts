@@ -3,7 +3,8 @@ import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { MiddlewareActionError } from '../types/shared/middleware-action-error';
 import { changeNotification } from '../redux/notification/notificationSlice';
 import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
-import { SnackbarInfoNotificationType } from '../types/ui/snackbar/snackbar-info-notification-type';
+import { NotificationType } from '../types/ui/snackbar/notification-type';
+import { ApplicationLanguage } from '../lib/constants';
 
 const language = localStorage.getItem('selectedLanguage');
 
@@ -12,18 +13,28 @@ export const notificationMiddleware: Middleware = (store) => (next) => (action) 
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {
       if (payload.statusCode === 409 && payload.detail)
-        store.dispatch(changeNotification({ infoNotification: SnackbarInfoNotificationType.InfoError, text: payload.detail }));
+        store.dispatch(
+          changeNotification({
+            infoNotification: NotificationType.InfoError,
+            text: payload.detail,
+          }),
+        );
       else if (payload.statusCode === 403 && payload.detail)
-        store.dispatch(changeNotification({ infoNotification: SnackbarInfoNotificationType.InfoError, text: payload.detail }));
+        store.dispatch(
+          changeNotification({
+            infoNotification: NotificationType.InfoError,
+            text: payload.detail,
+          }),
+        );
       else
         store.dispatch(
-          language === 'ru'
+          language === ApplicationLanguage.RUSSIAN
             ? changeNotification({
-                infoNotification: SnackbarInfoNotificationType.InfoError,
+                infoNotification: NotificationType.InfoError,
                 text: 'Сервис находится на техническом обслуживании',
               })
             : changeNotification({
-                infoNotification: SnackbarInfoNotificationType.InfoError,
+                infoNotification: NotificationType.InfoError,
                 text: 'The service is under maintenance',
               }),
         );

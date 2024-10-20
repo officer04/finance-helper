@@ -13,26 +13,14 @@ import { FormRegister } from './form-register';
 import { FormAuthorization } from './form-authorization';
 
 export const Home: FC = () => {
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
 
   const { t } = useTranslation();
-  const { notification } = useAppSelector(({ notification }) => notification);
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
   
-  const handleCloseSnackbar = (
-    event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenSnackbar(false);
-  };
 
   return (
     <div className="pl-2 pr-2">
@@ -54,17 +42,6 @@ export const Home: FC = () => {
           </Button>
         </div>
       </div>
-
-      {/* <Snackbar open={openSnackbar} autoHideDuration={2000} onClose={handleCloseSnackbar}>
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={notification.infoNotification}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {notification.text}
-        </Alert>
-      </Snackbar> */}
 
       <Modal
         open={openModalRegister}

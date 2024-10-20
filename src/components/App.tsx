@@ -1,10 +1,9 @@
-import { FC, useEffect, useState } from 'react';
-import { Footer, Header, Home } from './shared';
+import { FC, useEffect } from 'react';
+import { Footer, Header } from './shared';
 import { AppRoutes } from '../routes/app-routes';
 import i18n from '../i18n';
 import { DefaultApplicationLanguage } from '../lib/constants';
 import { SnackbarAll } from './shared/snackbar-all';
-import { useAppSelector } from '../redux/hooks';
 
 const App: FC = () => {
   useEffect(() => {
