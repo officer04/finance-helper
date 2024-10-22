@@ -21,7 +21,7 @@ export const MenuListComposition: FC = () => {
     setAnchorEl(null);
   };
 
-  const options = [{ link: ApplicationRoutes.PROFILE, name: t('titleProfileUser') }];
+  const options = [{ link: ApplicationRoutes.PROFILE, name: t('titleProfileUser') }, { link: ApplicationRoutes.EXPENSE_ITEM, name: t('expenseItem') }];
 
   return (
     <div>
