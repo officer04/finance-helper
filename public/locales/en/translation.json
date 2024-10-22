@@ -23,5 +23,7 @@
   "inputErrorRepeatPassword": "Must be equal password field",
   "titleProfileUser": "Profile",
   "buttonUpdate": "Save",
-  "textNotificationUpdateProfile": "The user has been successfully updated"
+  "textNotificationUpdateProfile": "The user has been successfully updated",
+  "loadingText": "loading",
+  "expenseItem": "Expense item"
 }
