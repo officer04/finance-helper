@@ -1,7 +1,7 @@
-import { Items } from '../../api/expense-item/get-all/items';
+import { Item } from '../../api/expense-item/get-all/item';
 import { LoadStatus } from '../../shared/load-status';
 
 export interface ExpenseItemState {
-  expenseItems: Items[];
+  expenseItems: Item[];
   loadStatus: LoadStatus;
 }
