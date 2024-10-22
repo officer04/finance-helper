@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
-export const ExpenseItem: FC<Props> = ({}) => {
+export const ExpenseItemList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
   const { expenseItems, loadStatus } = useAppSelector(({ expenseItem }) => expenseItem);
   const { t } = useTranslation();

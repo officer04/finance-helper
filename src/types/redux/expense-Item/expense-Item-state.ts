@@ -1,5 +1,5 @@
 import { Items } from '../../api/expense-item/get-all/items';
-import { LoadStatus } from './load-status';
+import { LoadStatus } from '../../shared/load-status';
 
 export interface ExpenseItemState {
   expenseItems: Items[];
