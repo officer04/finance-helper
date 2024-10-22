@@ -20,9 +20,6 @@ export const NotificationMiddleware: Middleware = (store) => (next) => (action) 
             text: payload.detail,
           }),
         );
-      } else if (payload.statusCode === 401) {
-        store.dispatch(changeAuth(false));
-        localStorage.removeItem('bearerToken');
       } else {
         if (language === ApplicationLanguage.RUSSIAN) {
           store.dispatch(
