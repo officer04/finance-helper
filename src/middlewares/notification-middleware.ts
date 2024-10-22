@@ -9,7 +9,7 @@ import { changeAuth } from '../redux/user/userSlice';
 
 const language = localStorage.getItem('selectedLanguage');
 
-export const notificationMiddleware: Middleware = (store) => (next) => (action) => {
+export const NotificationMiddleware: Middleware = (store) => (next) => (action) => {
   if (isRejectedWithValue(action)) {
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {

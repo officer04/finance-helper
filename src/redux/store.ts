@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './user/userSlice';
 import notificationSlice from './notification/notificationSlice';
-import { notificationMiddleware } from '../middlewares/notification-middleware';
+import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import supportedLanguagesSlice from './supported-languages/supportedLanguagesSlice';
+import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,8 @@ export const store = configureStore({
     notification: notificationSlice,
     supportedLanguages: supportedLanguagesSlice,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(notificationMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
