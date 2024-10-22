@@ -5,10 +5,11 @@ import { changeNotification } from '../redux/notification/notificationSlice';
 import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
 import { NotificationType } from '../types/ui/snackbar/notification-type';
 import { ApplicationLanguage } from '../lib/constants';
+import { changeAuth } from '../redux/user/userSlice';
 
 const language = localStorage.getItem('selectedLanguage');
 
-export const notificationMiddleware: Middleware = (store) => (next) => (action) => {
+export const NotificationMiddleware: Middleware = (store) => (next) => (action) => {
   if (isRejectedWithValue(action)) {
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {
