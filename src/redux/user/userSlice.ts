@@ -66,7 +66,11 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    changeAuth: (state, { payload }) => {
+      state.isAuth = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(authorizationUser.fulfilled, (state) => {
       state.isAuth = true;
@@ -77,6 +81,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+export const { changeAuth } = userSlice.actions;
 
 export default userSlice.reducer;

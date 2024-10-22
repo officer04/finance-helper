@@ -5,6 +5,7 @@ import { changeNotification } from '../redux/notification/notificationSlice';
 import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
 import { NotificationType } from '../types/ui/snackbar/notification-type';
 import { ApplicationLanguage } from '../lib/constants';
+import { changeAuth } from '../redux/user/userSlice';
 
 const language = localStorage.getItem('selectedLanguage');
 
@@ -19,6 +20,9 @@ export const notificationMiddleware: Middleware = (store) => (next) => (action) 
             text: payload.detail,
           }),
         );
+      } else if (payload.statusCode === 401) {
+        store.dispatch(changeAuth(false));
+        localStorage.removeItem('bearerToken');
       } else {
         if (language === ApplicationLanguage.RUSSIAN) {
           store.dispatch(
