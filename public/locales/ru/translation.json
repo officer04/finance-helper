@@ -22,5 +22,7 @@
   "inputErrorRepeatPassword": "Пароли не совпадают",
   "titleProfileUser": "Профиль",
   "buttonUpdate": "Сохранить",
-  "textNotificationUpdateProfile": "Пользователь успешно обновлен"
+  "textNotificationUpdateProfile": "Пользователь успешно обновлен",
+  "expenseItem": "Категории трат",
+  "loadingText": "Загрузка"
 }
