@@ -5,7 +5,7 @@
   "buttonOpenModalLogin": "Open dashboard",
   "footerText": "All rights reserved",
   "modalText": "Coming Soon",
-  "inputFirstName": "Name",
+  "inputFirstNameUser": "First Name",
   "inputLastNameUser": "Last Name",
   "inputEmailUser": "Email",
   "inputPasswordUser": "Password",
@@ -22,7 +22,8 @@
   "inputErrorPassword": "The password must consist of Latin letters and numbers from 4 to 32 characters in length",
   "inputErrorRepeatPassword": "Must be equal password field",
   "titleProfileUser": "Profile",
-  "expenseItem": "Expense item",
   "buttonUpdate": "Save",
-  "loadingText": "loading"
+  "textNotificationUpdateProfile": "The user has been successfully updated",
+  "loadingText": "loading",
+  "expenseItem": "Expense item"
 }

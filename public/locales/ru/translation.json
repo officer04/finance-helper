@@ -4,7 +4,7 @@
   "buttonOpenModalRegister": "Получить доступ",
   "footerText": "Всё права защищены",
   "modalText": "Ещё в разработке",
-  "inputFirstName": "Имя",
+  "inputFirstNameUser": "Имя",
   "inputLastNameUser": "Фамилия",
   "inputEmailUser": "Почта",
   "inputPasswordUser": "Пароль",
@@ -21,7 +21,8 @@
   "inputErrorPassword": "Пароль должен состоять из латинских букв и цифр длина от 4 до 32 символов",
   "inputErrorRepeatPassword": "Пароли не совпадают",
   "titleProfileUser": "Профиль",
-  "expenseItem": "Категории трат",
   "buttonUpdate": "Сохранить",
+  "textNotificationUpdateProfile": "Пользователь успешно обновлен",
+  "expenseItem": "Категории трат",
   "loadingText": "Загрузка"
 }
