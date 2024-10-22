@@ -12,32 +12,32 @@ export const notificationMiddleware: Middleware = (store) => (next) => (action) 
   if (isRejectedWithValue(action)) {
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {
-      if (payload.statusCode === 409 && payload.detail)
+      if ((payload.statusCode === 409 || payload.statusCode === 403) && payload.detail) {
         store.dispatch(
           changeNotification({
             infoNotification: NotificationType.InfoError,
             text: payload.detail,
           }),
         );
-      else if (payload.statusCode === 403 && payload.detail)
-        store.dispatch(
-          changeNotification({
-            infoNotification: NotificationType.InfoError,
-            text: payload.detail,
-          }),
-        );
-      else
-        store.dispatch(
-          language === ApplicationLanguage.RUSSIAN
-            ? changeNotification({
-                infoNotification: NotificationType.InfoError,
-                text: 'Сервис находится на техническом обслуживании',
-              })
-            : changeNotification({
-                infoNotification: NotificationType.InfoError,
-                text: 'The service is under maintenance',
-              }),
-        );
+      } else {
+        if (language === ApplicationLanguage.RUSSIAN) {
+          store.dispatch(
+            changeNotification({
+              infoNotification: NotificationType.InfoError,
+              text: 'Сервис находится на техническом обслуживании',
+            }),
+          );
+        } else if (language === ApplicationLanguage.ENGLISH) {
+          store.dispatch(
+            changeNotification({
+              infoNotification: NotificationType.InfoError,
+              text: 'The service is under maintenance',
+            }),
+          );
+        } else {
+          throw new Error('Unsupported language');
+        }
+      }
     }
   }
 

@@ -1,14 +1,10 @@
-import React from 'react';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import { Alert } from '@mui/material';
 
-import { useAppSelector } from '../../redux/hooks';
 import { FormRegister } from './form-register';
 import { FormAuthorization } from './form-authorization';
 
