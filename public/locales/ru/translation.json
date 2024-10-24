@@ -27,5 +27,6 @@
   "loadingText": "Загрузка",
   "buttonCreate": "Создать",
   "inputNameExpenseItem": "Название",
-  "inputExpenseItemTypeCodeExpenseItem": "Тип статьи расходов"
+  "inputExpenseItemTypeCodeExpenseItem": "Тип статьи расходов",
+  "inputColor": "Цвет"
 }

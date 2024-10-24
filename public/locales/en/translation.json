@@ -28,5 +28,6 @@
   "expenseItem": "Expense item",
   "buttonCreate": "Create",
   "inputNameExpenseItem": "Name",
-  "inputExpenseItemTypeCodeExpenseItem": "Expense item type"
+  "inputExpenseItemTypeCodeExpenseItem": "Expense item type",
+  "inputColor": "Color"
 }

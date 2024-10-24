@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid2';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
-import { Modal, Typography } from '@mui/material';
+import { Box, Modal, Skeleton, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import { FormCreateExpenseItem } from './form-create-exprense-item';
@@ -29,22 +29,35 @@ export const ExpenseItemList: FC<Props> = ({}) => {
   };
 
   return (
-    <Grid container spacing={2} padding={2}>
-      {loadStatus === 'loading' ? (
-        <Typography>{t('loadingText')}</Typography>
+    <>
+      {loadStatus !== 'loading' ? (
+        <Grid container spacing={2} justifyContent="center">
+          {[
+            ...Array(6)
+              .fill(0)
+              .map(() => (
+                <Grid size="auto">
+                  <Skeleton variant="rounded" width={190} height={85} />
+                </Grid>
+              )),
+          ]}
+        </Grid>
       ) : (
         <>
-          <FloatingActionButton color='primary' handelClick={handleToggleModal}>
+          <FloatingActionButton color="primary" handelClick={handleToggleModal}>
             <AddIcon />
           </FloatingActionButton>
-          {expenseItems.map((item) => (
-            <ExpenseItemCard
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              deleteCard={handleClickDeleteCard}
-            />
-          ))}
+          <Grid container spacing={2} justifyContent="center">
+            {expenseItems.map((item) => (
+              <ExpenseItemCard
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                deleteCard={handleClickDeleteCard}
+              />
+            ))}
+          </Grid>
+
           <Modal
             open={openModal}
             onClose={handleToggleModal}
@@ -54,12 +67,12 @@ export const ExpenseItemList: FC<Props> = ({}) => {
             <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
               <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
                 {t('inputExpenseItemTypeCodeExpenseItem')}
-                <FormCreateExpenseItem setOpenModal={setOpenModal} />
               </Typography>
+                <FormCreateExpenseItem setOpenModal={setOpenModal} />
             </div>
           </Modal>
         </>
       )}
-    </Grid>
+    </>
   );
 };

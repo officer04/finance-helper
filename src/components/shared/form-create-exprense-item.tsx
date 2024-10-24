@@ -72,7 +72,7 @@ export const FormCreateExpenseItem: FC<Props> = ({ setOpenModal }) => {
       <ColorPicker
         control={control}
         name="color"
-        label="цвет"
+        label={t('inputColor')}
         rules={{
           required: t('inputRequiredFields'),
         }}
