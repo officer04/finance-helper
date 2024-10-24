@@ -1,13 +1,15 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import Grid from '@mui/material/Grid2';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
-import { ExpenseItemCard } from './expense-item-card';
-import { ExpenseItemCardAdd } from './expense-item-card-add';
-import { Typography } from '@mui/material';
+import { Modal, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import AddIcon from '@mui/icons-material/Add';
+import { FormCreateExpenseItem } from './form-create-exprense-item';
+import { ExpenseItemCard } from './expense-item-card';
+import { FloatingActionButton } from './floating-action-button';
 
 interface Props {}
 
@@ -15,6 +17,8 @@ export const ExpenseItemList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
   const { expenseItems, loadStatus } = useAppSelector(({ expenseItem }) => expenseItem);
   const { t } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
+  const handleToggleModal = () => setOpenModal(!openModal);
 
   useEffect(() => {
     dispatch(getExpenseItem());
@@ -24,17 +28,15 @@ export const ExpenseItemList: FC<Props> = ({}) => {
     console.log('delete');
   };
 
-  const handleClickAddCard = () => {
-    console.log('add');
-  };
-
   return (
     <Grid container spacing={2} padding={2}>
       {loadStatus === 'loading' ? (
         <Typography>{t('loadingText')}</Typography>
       ) : (
         <>
-          <ExpenseItemCardAdd addCard={handleClickAddCard} />
+          <FloatingActionButton color='primary' handelClick={handleToggleModal}>
+            <AddIcon />
+          </FloatingActionButton>
           {expenseItems.map((item) => (
             <ExpenseItemCard
               key={item.id}
@@ -43,6 +45,19 @@ export const ExpenseItemList: FC<Props> = ({}) => {
               deleteCard={handleClickDeleteCard}
             />
           ))}
+          <Modal
+            open={openModal}
+            onClose={handleToggleModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
+              <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
+                {t('inputExpenseItemTypeCodeExpenseItem')}
+                <FormCreateExpenseItem setOpenModal={setOpenModal} />
+              </Typography>
+            </div>
+          </Modal>
         </>
       )}
     </Grid>

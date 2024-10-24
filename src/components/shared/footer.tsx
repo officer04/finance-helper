@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { ApplicationRoutes } from '../../lib/constants';
 
 export const Footer: FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const location = useLocation();
   const currentYear = new Date().getFullYear();
   return (

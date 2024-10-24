@@ -13,7 +13,7 @@ export const NotificationMiddleware: Middleware = (store) => (next) => (action) 
   if (isRejectedWithValue(action)) {
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {
-      if ((payload.statusCode === 409 || payload.statusCode === 403) && payload.detail) {
+      if ((payload.statusCode === 409 || payload.statusCode === 403 || payload.statusCode === 400) && payload.detail) {
         store.dispatch(
           changeNotification({
             infoNotification: NotificationType.InfoError,

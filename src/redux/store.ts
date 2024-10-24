@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import userSlice from './user/userSlice';
 import notificationSlice from './notification/notificationSlice';
-import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import supportedLanguagesSlice from './supported-languages/supportedLanguagesSlice';
 import expenseItemSlice from './expense-item/expenseItemSlice';
+import  expenseItemTypeSlice  from './expense-item-type/expenseItemTypeSlice';
+
+import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
 
 export const store = configureStore({
@@ -12,6 +15,7 @@ export const store = configureStore({
     notification: notificationSlice,
     supportedLanguages: supportedLanguagesSlice,
     expenseItem: expenseItemSlice,
+    expenseItemType: expenseItemTypeSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware),
