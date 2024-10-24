@@ -22,8 +22,12 @@
   "inputErrorPassword": "The password must consist of Latin letters and numbers from 4 to 32 characters in length",
   "inputErrorRepeatPassword": "Must be equal password field",
   "titleProfileUser": "Profile",
-  "buttonUpdate": "Save",
+  "buttonSave": "Save",
   "textNotificationUpdateProfile": "The user has been successfully updated",
   "loadingText": "loading",
-  "expenseItem": "Expense item"
+  "expenseItem": "Expense item",
+  "buttonCreate": "Create",
+  "inputNameExpenseItem": "Name",
+  "inputExpenseItemTypeCodeExpenseItem": "Expense item type",
+  "inputColor": "Color"
 }

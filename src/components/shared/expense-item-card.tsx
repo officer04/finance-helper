@@ -14,7 +14,7 @@ interface Props {
 
 export const ExpenseItemCard: FC<Props> = ({ id, name, deleteCard }) => {
   return (
-    <Grid size={{ xs: 6, md: 3 }}>
+    <Grid size="auto">
       <Box
         component="div"
         sx={{
