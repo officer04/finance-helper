@@ -9,10 +9,11 @@ import Box from '@mui/material/Box';
 interface Props {
   id: number;
   name: string;
-  deleteCard: () => void;
+  deleteCard: (e: React.MouseEvent<HTMLElement>) => void;
+  updateCard: (id: number) => void;
 }
 
-export const ExpenseItemCard: FC<Props> = ({ id, name, deleteCard }) => {
+export const ExpenseItemCard: FC<Props> = ({ id, name, deleteCard, updateCard }) => {
   return (
     <Grid size="auto">
       <Box
@@ -25,14 +26,18 @@ export const ExpenseItemCard: FC<Props> = ({ id, name, deleteCard }) => {
           alignItems: 'center',
           borderRadius: 2,
           boxShadow: '8px 4px 28px 0px rgba(34, 60, 80, 0.2)',
-          width: '190px',
         }}
       >
-        <Typography variant="body1" component="p">
+        <Typography
+          onClick={() => updateCard(id)}
+          sx={{ width: '130px' }}
+          variant="body1"
+          component="p"
+        >
           {name}
         </Typography>
-        <IconButton color="inherit" onClick={deleteCard}>
-          <ClearIcon style={{ position: 'absolute', right: 0, height: '40px' }} />
+        <IconButton color="inherit" onClick={deleteCard} sx={{ width: '40px' }}>
+          <ClearIcon sx={{ position: 'absolute', right: 0, height: '40px' }} />
         </IconButton>
       </Box>
     </Grid>

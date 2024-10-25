@@ -28,5 +28,6 @@
   "buttonCreate": "Создать",
   "inputNameExpenseItem": "Название",
   "inputExpenseItemTypeCodeExpenseItem": "Тип статьи расходов",
-  "inputColor": "Цвет"
+  "inputColor": "Цвет",
+  "updateExpenseItemTitle": "Обноление статьи расходов"
 }

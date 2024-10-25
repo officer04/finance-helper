@@ -4,12 +4,14 @@ import Grid from '@mui/material/Grid2';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
-import { Box, Modal, Skeleton, Stack, Typography } from '@mui/material';
+import { Skeleton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import { FormCreateExpenseItem } from './form-create-exprense-item';
 import { ExpenseItemCard } from './expense-item-card';
 import { FloatingActionButton } from './floating-action-button';
+import { ModalBox } from './modal-box';
+import { FormUpdateExpenseItem } from './form-update-exprense-item';
 
 interface Props {}
 
@@ -17,26 +19,35 @@ export const ExpenseItemList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
   const { expenseItems, loadStatus } = useAppSelector(({ expenseItem }) => expenseItem);
   const { t } = useTranslation();
-  const [openModal, setOpenModal] = useState(false);
-  const handleToggleModal = () => setOpenModal(!openModal);
+  const [openModalCreate, setOpenModalCreate] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [expenseItemCardId, setExpenseItemCardId] = useState(0);
+  const handleToggleModalCreate = () => setOpenModalCreate(!openModalCreate);
+  const handleToggleModalUpdate = () => setOpenModalUpdate(!openModalUpdate);
 
   useEffect(() => {
     dispatch(getExpenseItem());
   }, []);
 
-  const handleClickDeleteCard = () => {
+  const handleClickDeleteCard = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     console.log('delete');
+  };
+
+  const handleUpdateCard = (id: number) => {
+    handleToggleModalUpdate();
+    setExpenseItemCardId(id);
   };
 
   return (
     <>
-      {loadStatus !== 'loading' ? (
+      {loadStatus === 'loading' ? (
         <Grid container spacing={2} justifyContent="center">
           {[
             ...Array(6)
               .fill(0)
-              .map(() => (
-                <Grid size="auto">
+              .map((_, index) => (
+                <Grid size="auto" key={index}>
                   <Skeleton variant="rounded" width={190} height={85} />
                 </Grid>
               )),
@@ -44,9 +55,10 @@ export const ExpenseItemList: FC<Props> = ({}) => {
         </Grid>
       ) : (
         <>
-          <FloatingActionButton color="primary" handelClick={handleToggleModal}>
+          <FloatingActionButton color="primary" handelClick={handleToggleModalCreate}>
             <AddIcon />
           </FloatingActionButton>
+
           <Grid container spacing={2} justifyContent="center">
             {expenseItems.map((item) => (
               <ExpenseItemCard
@@ -54,23 +66,29 @@ export const ExpenseItemList: FC<Props> = ({}) => {
                 id={item.id}
                 name={item.name}
                 deleteCard={handleClickDeleteCard}
+                updateCard={handleUpdateCard}
               />
             ))}
           </Grid>
 
-          <Modal
-            open={openModal}
-            onClose={handleToggleModal}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+          <ModalBox
+            title={t('inputExpenseItemTypeCodeExpenseItem')}
+            onClose={handleToggleModalCreate}
+            open={openModalCreate}
           >
-            <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
-              <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
-                {t('inputExpenseItemTypeCodeExpenseItem')}
-              </Typography>
-                <FormCreateExpenseItem setOpenModal={setOpenModal} />
-            </div>
-          </Modal>
+            <FormCreateExpenseItem setOpenModal={setOpenModalCreate} />
+          </ModalBox>
+
+          <ModalBox
+            title={t('updateExpenseItemTitle')}
+            onClose={handleToggleModalUpdate}
+            open={openModalUpdate}
+          >
+            <FormUpdateExpenseItem
+              setOpenModal={setOpenModalUpdate}
+              expenseItemCardId={expenseItemCardId}
+            />
+          </ModalBox>
         </>
       )}
     </>

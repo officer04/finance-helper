@@ -29,5 +29,6 @@
   "buttonCreate": "Create",
   "inputNameExpenseItem": "Name",
   "inputExpenseItemTypeCodeExpenseItem": "Expense item type",
-  "inputColor": "Color"
+  "inputColor": "Color",
+  "updateExpenseItemTitle": "updating the expense item"
 }

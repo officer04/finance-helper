@@ -2,11 +2,11 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
 import { FormRegister } from './form-register';
 import { FormAuthorization } from './form-authorization';
+import { ModalBox } from './modal-box';
 
 export const Home: FC = () => {
   const [openModalLogin, setOpenModalLogin] = useState(false);
@@ -16,7 +16,6 @@ export const Home: FC = () => {
 
   const handleToggleModalRegister = () => setOpenModalRegister(!openModalRegister);
   const handleToggleModalLogin = () => setOpenModalLogin(!openModalLogin);
-  
 
   return (
     <div className="pl-2 pr-2">
@@ -24,7 +23,7 @@ export const Home: FC = () => {
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <div className='flex flex-col w-50'>
+        <div className="flex flex-col w-50">
           <Button
             variant="outlined"
             style={{ marginBottom: '10px' }}
@@ -39,33 +38,17 @@ export const Home: FC = () => {
         </div>
       </div>
 
-      <Modal
-        open={openModalRegister}
+      <ModalBox
+        title={t('registerTitle')}
         onClose={handleToggleModalRegister}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        open={openModalRegister}
       >
-        <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
-          <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
-            {t('registerTitle')}
-          </Typography>
-          <FormRegister/>
-        </div>
-      </Modal>
-
-      <Modal
-        open={openModalLogin}
-        onClose={handleToggleModalLogin}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 w-[400px] border-solid border-2 p-4  bg-white shadow-sm rounded-lg">
-          <Typography variant="h5" marginBottom={2} textAlign={'center'} component="h1">
-            {t('loginTitle')}
-          </Typography>
-          <FormAuthorization/>
-        </div>
-      </Modal>
+        <FormRegister />
+      </ModalBox>
+      
+      <ModalBox title={t('loginTitle')} onClose={handleToggleModalLogin} open={openModalLogin}>
+        <FormAuthorization />
+      </ModalBox>
     </div>
   );
 };

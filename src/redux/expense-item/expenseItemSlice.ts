@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { axiosInstance } from '..';
 import { ExpenseItemState } from '../../types/redux/expense-Item/expense-Item-state';
-import { CreateExpenseItemResponse } from '../../types/api/expense-item/create/response';
-import { CreateExpenseItemBody } from '../../types/api/expense-item/create/body';
 import { GetExpenseItemResponse } from '../../types/api/expense-item/get-all/response';
+import { UpdateExpenseItemBody } from '../../types/api/expense-item/update/body';
+import { UpdateExpenseItemResponse } from '../../types/api/expense-item/update/response';
+import { CreateExpenseItemBody } from '../../types/api/expense-item/create/body';
+import { CreateExpenseItemResponse } from '../../types/api/expense-item/create/response';
 
 export const createExpenseItem = createAsyncThunk(
   'expenseItem/createExpenseItem',
@@ -17,6 +19,20 @@ export const createExpenseItem = createAsyncThunk(
     }
   },
 );
+
+export const updateExpenseItem = createAsyncThunk(
+  'expenseItem/updateExpenseItem',
+  async (request: UpdateExpenseItemBody, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put(`/expense-item/${request.id}`, request.body);
+      return response.data as UpdateExpenseItemResponse;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
 
 export const getExpenseItem = createAsyncThunk(
   'expenseItem/getExpenseItem',
