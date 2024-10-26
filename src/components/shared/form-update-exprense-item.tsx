@@ -106,7 +106,7 @@ export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemInfo
           type="submit"
           size="large"
         >
-          {t('buttonCreate')}
+          {t('buttonUpdate')}
         </LoadingButton>
       </div>
     </form>
