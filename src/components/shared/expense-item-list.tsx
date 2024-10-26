@@ -12,6 +12,8 @@ import { ExpenseItemCard } from './expense-item-card';
 import { FloatingActionButton } from './floating-action-button';
 import { ModalBox } from './modal-box';
 import { FormUpdateExpenseItem } from './form-update-exprense-item';
+import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
+import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
 
 interface Props {}
 
@@ -21,7 +23,12 @@ export const ExpenseItemList: FC<Props> = ({}) => {
   const { t } = useTranslation();
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
-  const [expenseItemCardId, setExpenseItemCardId] = useState(0);
+  const [expenseItemInfo, setExpenseItemInfo] = useState<ExpenseItemInfo>({
+    id: 0,
+    name: '',
+    color: '',
+    expenseItemTypeCode: { code: '', name: '' },
+  });
   const handleToggleModalCreate = () => setOpenModalCreate(!openModalCreate);
   const handleToggleModalUpdate = () => setOpenModalUpdate(!openModalUpdate);
 
@@ -34,15 +41,20 @@ export const ExpenseItemList: FC<Props> = ({}) => {
     console.log('delete');
   };
 
-  const handleUpdateCard = (id: number) => {
+  const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {
     handleToggleModalUpdate();
-    setExpenseItemCardId(id);
+    setExpenseItemInfo({
+      id: id,
+      name: name,
+      color: color,
+      expenseItemTypeCode: { name: expenseItemTypeCode.code, code: expenseItemTypeCode.name },
+    });
   };
 
   return (
     <>
       {loadStatus === 'loading' ? (
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center" style={{ flex: 1 }}>
           {[
             ...Array(6)
               .fill(0)
@@ -65,6 +77,8 @@ export const ExpenseItemList: FC<Props> = ({}) => {
                 key={item.id}
                 id={item.id}
                 name={item.name}
+                color={item.color}
+                expenseItemTypeCode={item.expenseItemType}
                 deleteCard={handleClickDeleteCard}
                 updateCard={handleUpdateCard}
               />
@@ -86,7 +100,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
           >
             <FormUpdateExpenseItem
               setOpenModal={setOpenModalUpdate}
-              expenseItemCardId={expenseItemCardId}
+              expenseItemInfo={expenseItemInfo}
             />
           </ModalBox>
         </>

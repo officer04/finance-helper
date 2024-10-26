@@ -5,10 +5,10 @@ interface Props {
   children: ReactNode;
   open: boolean;
   title: string;
-  onClose: () => void
+  onClose: () => void;
 }
 
-export const ModalBox: FC<Props> = ({title, open, onClose, children}) => {
+export const ModalBox: FC<Props> = ({ title, open, onClose, children }) => {
   return (
     <Modal
       open={open}

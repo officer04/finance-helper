@@ -18,11 +18,11 @@ const App: FC = () => {
   }, []);
  
   return (
-    <div className="flex flex-col items-center justify-between h-screen">
+    <div className="">
       <Header />
       <AppRoutes />
       <SnackbarAll/>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

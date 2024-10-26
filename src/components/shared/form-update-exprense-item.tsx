@@ -11,33 +11,32 @@ import {
   getExpenseItem,
   updateExpenseItem,
 } from '../../redux/expense-item/expenseItemSlice';
-import { FormInputCreateExpenseItem } from '../../types/ui/form-create-exprense-item/form-input-create-expense-item';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 import { FormInputUpdateExpenseItem } from '../../types/ui/form-update-exprense-item/form-input-update-expense-item';
+import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
 
 interface Props {
   setOpenModal: (str: boolean) => void;
-  expenseItemCardId: number;
+  expenseItemInfo: ExpenseItemInfo;
 }
 
-export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemCardId }) => {
+export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemInfo }) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const { expenseItemType } = useAppSelector(({ expenseItemType }) => expenseItemType);
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  function getRandomHexColor(): string {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return `#${randomColor.padStart(6, '0')}`;
-  }
 
-  const randomHexColor = getRandomHexColor();
   const { handleSubmit, control } = useForm<FormInputUpdateExpenseItem>({
     mode: 'onSubmit',
-    defaultValues: { name: '', color: randomHexColor, expenseItemTypeCode: '' },
+    defaultValues: {
+      name: expenseItemInfo.name,
+      color: expenseItemInfo.color,
+      expenseItemTypeCode: expenseItemInfo.expenseItemTypeCode.name,
+    },
   });
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemCard
   const onSubmit: SubmitHandler<FormInputUpdateExpenseItem> = (data) => {
     setIsLoadingButton(true);
     const request = {
-      id: expenseItemCardId,
+      id: expenseItemInfo.id,
       body: {
         name: data.name,
         color: data.color,

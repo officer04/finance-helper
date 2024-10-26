@@ -19,11 +19,11 @@ export const Home: FC = () => {
 
   return (
     <div className="pl-2 pr-2">
-      <div className="text-center">
+      <div className="flex flex-col items-center justify-center">
         <Typography variant="h5" marginBottom={2} component="h1">
           {t('title')}
         </Typography>
-        <div className="flex flex-col w-50">
+        <div className="flex flex-col">
           <Button
             variant="outlined"
             style={{ marginBottom: '10px' }}
@@ -45,7 +45,7 @@ export const Home: FC = () => {
       >
         <FormRegister />
       </ModalBox>
-      
+
       <ModalBox title={t('loginTitle')} onClose={handleToggleModalLogin} open={openModalLogin}>
         <FormAuthorization />
       </ModalBox>
