@@ -26,7 +26,9 @@
   "expenseItem": "Категории трат",
   "loadingText": "Загрузка",
   "buttonCreate": "Создать",
+  "buttonUpdate": "Обновить",
   "inputNameExpenseItem": "Название",
   "inputExpenseItemTypeCodeExpenseItem": "Тип статьи расходов",
-  "inputColor": "Цвет"
+  "inputColor": "Цвет",
+  "updateExpenseItemTitle": "Обноление статьи расходов"
 }

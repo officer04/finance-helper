@@ -69,7 +69,7 @@ export const FormUpdateUser: FC<Props> = () => {
       .finally(() => setIsLoadingButton(false));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center">
       <InputText
         control={control}
         name="firstName"

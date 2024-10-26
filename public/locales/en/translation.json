@@ -27,7 +27,9 @@
   "loadingText": "loading",
   "expenseItem": "Expense item",
   "buttonCreate": "Create",
+  "buttonUpdate": "Update",
   "inputNameExpenseItem": "Name",
   "inputExpenseItemTypeCodeExpenseItem": "Expense item type",
-  "inputColor": "Color"
+  "inputColor": "Color",
+  "updateExpenseItemTitle": "updating the expense item"
 }

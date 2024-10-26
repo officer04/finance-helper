@@ -7,7 +7,7 @@ import { MenuListComposition } from '../menu-list-composition';
 
 export const HeaderAuth: FC = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{marginBottom: "40px"}}>
       <Toolbar>
         <MenuListComposition />
       </Toolbar>

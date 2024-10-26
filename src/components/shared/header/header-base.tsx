@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 
 export const HeaderBase: FC = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{marginBottom: "40px"}}>
       <Toolbar>
       </Toolbar>
     </AppBar>
