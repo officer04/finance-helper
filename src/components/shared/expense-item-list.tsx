@@ -53,8 +53,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
     setIsLoadingButton(true);
     dispatch(deleteExpenseItem(id))
       .then(() => {
-        handleToggleModalDelete();
-        dispatch(deleteExpenseItem(id));
+        dispatch(getExpenseItem())
       })
       .finally(() => setIsLoadingButton(false));
   };

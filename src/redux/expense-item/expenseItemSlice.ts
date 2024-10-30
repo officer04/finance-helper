@@ -7,7 +7,6 @@ import { UpdateExpenseItemResponse } from '../../types/api/expense-item/update/r
 import { CreateExpenseItemBody } from '../../types/api/expense-item/create/body';
 import { CreateExpenseItemResponse } from '../../types/api/expense-item/create/response';
 
-
 export const createExpenseItem = createAsyncThunk(
   'expenseItem/createExpenseItem',
   async (body: CreateExpenseItemBody, { rejectWithValue }) => {
@@ -64,11 +63,7 @@ const initialState: ExpenseItemState = {
 export const expenseItemSlice = createSlice({
   name: 'expenseItem',
   initialState,
-  reducers: {
-    deleteExpenseItem: (state, action) => {
-      state.expenseItems = state.expenseItems.filter((item) => item.id !== action.payload);
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getExpenseItem.fulfilled, (state, action) => {
       state.expenseItems = action.payload.items;
@@ -80,6 +75,6 @@ export const expenseItemSlice = createSlice({
   },
 });
 
-export const { deleteExpenseItem: changeExpenseItems } = expenseItemSlice.actions;
+export const {} = expenseItemSlice.actions;
 
 export default expenseItemSlice.reducer;
