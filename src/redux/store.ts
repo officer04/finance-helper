@@ -4,7 +4,8 @@ import userSlice from './user/userSlice';
 import notificationSlice from './notification/notificationSlice';
 import supportedLanguagesSlice from './supported-languages/supportedLanguagesSlice';
 import expenseItemSlice from './expense-item/expenseItemSlice';
-import  expenseItemTypeSlice  from './expense-item-type/expenseItemTypeSlice';
+import expenseItemTypeSlice  from './expense-item-type/expenseItemTypeSlice';
+import incomeSourceSlice  from './Income-source/IncomeSourceSlice';
 
 import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
@@ -15,7 +16,8 @@ export const store = configureStore({
     notification: notificationSlice,
     supportedLanguages: supportedLanguagesSlice,
     expenseItem: expenseItemSlice,
-    expenseItemType: expenseItemTypeSlice
+    expenseItemType: expenseItemTypeSlice,
+    incomeSource: incomeSourceSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware),
