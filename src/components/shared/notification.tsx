@@ -4,10 +4,9 @@ import { Alert } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeNotification } from '../../redux/notification/notificationSlice';
 
-interface Props {
-}
+interface Props {}
 
-export const SnackbarAll: FC<Props> = () => {
+export const Notification: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { notification } = useAppSelector(({ notification }) => notification);
   const handleCloseSnackbar = (
@@ -18,9 +17,7 @@ export const SnackbarAll: FC<Props> = () => {
       return;
     }
 
-    dispatch(
-      changeNotification({ infoNotification: notification.infoNotification, text: '' }),
-    );
+    dispatch(changeNotification({ infoNotification: notification.infoNotification, text: '' }));
   };
   return (
     <Snackbar open={!!notification.text} autoHideDuration={2000} onClose={handleCloseSnackbar}>

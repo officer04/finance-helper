@@ -1,5 +1,5 @@
-import { Item } from './item';
+import { ExpenseItem } from './expense-item';
 
 export interface GetExpenseItemResponse {
-  items: Item[];
+  items: ExpenseItem[];
 }

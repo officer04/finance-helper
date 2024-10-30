@@ -34,5 +34,6 @@
   "updateExpenseItemTitle": "Updating the expense item",
   "titleExpenseItemDelete": "Are you sure you want to delete a category",
   "buttonExpenseItemDelete": "Delete",
-  "buttonExpenseItemReturn": "Return"
+  "buttonExpenseItemСancel": "Сancel",
+  "incomeSource": "Income Source"
 }

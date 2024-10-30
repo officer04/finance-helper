@@ -3,7 +3,7 @@ import { Header } from './shared';
 import { AppRoutes } from '../routes/app-routes';
 import i18n from '../i18n';
 import { DefaultApplicationLanguage } from '../lib/constants';
-import { SnackbarAll } from './shared/snackbar-all';
+import { Notification } from './shared/notification';
 
 const App: FC = () => {
   useEffect(() => {
@@ -16,13 +16,13 @@ const App: FC = () => {
       i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);
     }
   }, []);
- 
+
   return (
-    <div className="">
+    <>
       <Header />
       <AppRoutes />
-      <SnackbarAll/>
-    </div>
+      <Notification />
+    </>
   );
 };
 

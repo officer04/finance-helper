@@ -16,7 +16,7 @@ interface Props {
   loading: boolean;
   colorButtonTextAgree: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
   buttonTextAgree: string;
-  buttonTextReturn: string;
+  buttonTextCancel: string;
   handleClose: () => void;
   handleAgree: (id: number) => void;
 }
@@ -29,7 +29,7 @@ export const DialogBox: FC<Props> = ({
   text,
   loading,
   buttonTextAgree,
-  buttonTextReturn,
+  buttonTextCancel,
   colorButtonTextAgree,
   handleAgree,
   handleClose,
@@ -51,7 +51,7 @@ export const DialogBox: FC<Props> = ({
       )}
       <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button onClick={handleClose} size="large" variant="outlined">
-          {buttonTextReturn}
+          {buttonTextCancel}
         </Button>
         <LoadingButton
           onClick={() => handleAgree(id)}
