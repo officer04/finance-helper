@@ -45,13 +45,13 @@ export const FormCreateExpenseItem: FC<Props> = ({ setOpenModal }) => {
       color: data.color,
       expenseItemTypeCode: data.expenseItemTypeCode,
     };
-    // dispatch(createExpenseItem(body))
-    //   .unwrap()
-    //   .then(() => {
-    //     dispatch(getExpenseItem()).then(() => setOpenModal(false));
-    //   })
-    //   .catch(() => {})
-    //   .finally(() => setIsLoadingButton(false));
+    dispatch(createExpenseItem(body))
+      .unwrap()
+      .then(() => {
+        dispatch(getExpenseItem()).then(() => setOpenModal(false));
+      })
+      .catch(() => {})
+      .finally(() => setIsLoadingButton(false));
   };
 
   return (
