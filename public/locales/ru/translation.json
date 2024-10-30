@@ -30,5 +30,8 @@
   "inputNameExpenseItem": "Название",
   "inputExpenseItemTypeCodeExpenseItem": "Тип статьи расходов",
   "inputColor": "Цвет",
-  "updateExpenseItemTitle": "Обноление статьи расходов"
+  "updateExpenseItemTitle": "Обноление статьи расходов",
+  "titleExpenseItemDelete": "Вы точно хотите удалить категорию",
+  "buttonExpenseItemDelete": "Удалить",
+  "buttonExpenseItemReturn": "Отмена"
 }

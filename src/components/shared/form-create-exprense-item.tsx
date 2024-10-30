@@ -48,10 +48,12 @@ export const FormCreateExpenseItem: FC<Props> = ({ setOpenModal }) => {
     dispatch(createExpenseItem(body))
       .unwrap()
       .then(() => {
-        dispatch(getExpenseItem()).then(() => setOpenModal(false));
+        dispatch(getExpenseItem()).then(() => {
+          setOpenModal(false);
+          setIsLoadingButton(false)
+        });
       })
-      .catch(() => {})
-      .finally(() => setIsLoadingButton(false));
+      .catch(() => {});
   };
 
   return (
