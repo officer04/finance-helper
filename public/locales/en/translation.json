@@ -31,5 +31,8 @@
   "inputNameExpenseItem": "Name",
   "inputExpenseItemTypeCodeExpenseItem": "Expense item type",
   "inputColor": "Color",
-  "updateExpenseItemTitle": "updating the expense item"
+  "updateExpenseItemTitle": "updating the expense item",
+  "titleExpenseItemDelete": "Are you sure you want to delete a category",
+  "buttonExpenseItemDelete": "Delete",
+  "buttonExpenseItemReturn": "Return"
 }

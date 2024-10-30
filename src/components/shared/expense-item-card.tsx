@@ -12,7 +12,7 @@ interface Props {
   name: string;
   color: string;
   expenseItemTypeCode: { code: string; name: string };
-  deleteCard: (e: React.MouseEvent<HTMLElement>) => void;
+  deleteCard: ( name: string, id: number) => void;
   updateCard: HandleUpdateCard
 }
 
@@ -45,7 +45,7 @@ export const ExpenseItemCard: FC<Props> = ({
         >
           {name}
         </Typography>
-        <IconButton color="inherit" onClick={deleteCard} sx={{ width: '40px', p: "20px" }}>
+        <IconButton color="inherit" onClick={(e) => deleteCard(name, id)} sx={{ width: '40px', p: "20px" }}>
           <ClearIcon sx={{ position: 'absolute', right: 7, height: '40px' }} />
         </IconButton>
       </Box>

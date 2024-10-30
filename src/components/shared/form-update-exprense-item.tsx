@@ -6,16 +6,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getExpenseItemType } from '../../redux/expense-item-type/expenseItemTypeSlice';
-import {
-  createExpenseItem,
-  getExpenseItem,
-  updateExpenseItem,
-} from '../../redux/expense-item/expenseItemSlice';
+import { getExpenseItem, updateExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
-import { FormInputUpdateExpenseItem } from '../../types/ui/form-update-exprense-item/form-input-update-expense-item';
+import { FormInputUpdateExpenseItem } from '../../types/ui/form-update-expense-item/form-input-update-expense-item';
 import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
 
 interface Props {

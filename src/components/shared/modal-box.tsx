@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   open: boolean;
-  title: string;
+  title?: string;
   onClose: () => void;
 }
 

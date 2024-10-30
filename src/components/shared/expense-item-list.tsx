@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid2';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
+import { deleteExpenseItem, getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 import { Skeleton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -14,31 +14,49 @@ import { ModalBox } from './modal-box';
 import { FormUpdateExpenseItem } from './form-update-exprense-item';
 import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
 import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
+import { DialogBox } from './dialog';
 
 interface Props {}
 
 export const ExpenseItemList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
-  const { expenseItems, loadStatus } = useAppSelector(({ expenseItem }) => expenseItem);
   const { t } = useTranslation();
+  const { expenseItems, loadStatus } = useAppSelector(({ expenseItem }) => expenseItem);
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [titleDeleteExpenseItem, setTitleDeleteExpenseItem] = useState('');
+  const [idDeleteExpenseItem, setIdDeleteExpenseItem] = useState(0);
   const [expenseItemInfo, setExpenseItemInfo] = useState<ExpenseItemInfo>({
     id: 0,
     name: '',
     color: '',
     expenseItemTypeCode: { code: '', name: '' },
   });
+
   const handleToggleModalCreate = () => setOpenModalCreate(!openModalCreate);
   const handleToggleModalUpdate = () => setOpenModalUpdate(!openModalUpdate);
+  const handleToggleModalDelete = () => setOpenModalDelete(!openModalDelete);
 
   useEffect(() => {
     dispatch(getExpenseItem());
   }, []);
 
-  const handleClickDeleteCard = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    console.log('delete');
+  const handleClickDeleteCard = (name: string, id: number) => {
+    handleToggleModalDelete();
+    setTitleDeleteExpenseItem(name);
+    setIdDeleteExpenseItem(id);
+  };
+
+  const handleDelete = (id: number) => {
+    setIsLoadingButton(true);
+    dispatch(deleteExpenseItem(id))
+      .then(() => {
+        handleToggleModalDelete();
+        dispatch(deleteExpenseItem(id));
+      })
+      .finally(() => setIsLoadingButton(false));
   };
 
   const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {
@@ -54,7 +72,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
   return (
     <>
       {loadStatus === 'loading' ? (
-        <Grid container spacing={2} justifyContent="center" style={{ flex: 1 }}>
+        <Grid container spacing={2} justifyContent="center">
           {[
             ...Array(6)
               .fill(0)
@@ -71,7 +89,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
             <AddIcon />
           </FloatingActionButton>
 
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={2} justifyContent="space-evenly">
             {expenseItems.map((item) => (
               <ExpenseItemCard
                 key={item.id}
@@ -103,6 +121,19 @@ export const ExpenseItemList: FC<Props> = ({}) => {
               expenseItemInfo={expenseItemInfo}
             />
           </ModalBox>
+
+          <DialogBox
+            open={openModalDelete}
+            title={t('titleExpenseItemDelete')}
+            name={titleDeleteExpenseItem}
+            id={idDeleteExpenseItem}
+            loading={isLoadingButton}
+            colorButtonTextAgree="error"
+            buttonTextAgree={t('buttonExpenseItemDelete')}
+            buttonTextReturn={t('buttonExpenseItemReturn')}
+            handleAgree={handleDelete}
+            handleClose={handleToggleModalDelete}
+          />
         </>
       )}
     </>

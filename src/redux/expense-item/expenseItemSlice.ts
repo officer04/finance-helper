@@ -7,6 +7,7 @@ import { UpdateExpenseItemResponse } from '../../types/api/expense-item/update/r
 import { CreateExpenseItemBody } from '../../types/api/expense-item/create/body';
 import { CreateExpenseItemResponse } from '../../types/api/expense-item/create/response';
 
+
 export const createExpenseItem = createAsyncThunk(
   'expenseItem/createExpenseItem',
   async (body: CreateExpenseItemBody, { rejectWithValue }) => {
@@ -33,6 +34,18 @@ export const updateExpenseItem = createAsyncThunk(
   },
 );
 
+export const deleteExpenseItem = createAsyncThunk(
+  'expenseItem/deleteExpenseItem',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.delete(`/expense-item/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
+  },
+);
 
 export const getExpenseItem = createAsyncThunk(
   'expenseItem/getExpenseItem',
@@ -55,7 +68,11 @@ const initialState: ExpenseItemState = {
 export const expenseItemSlice = createSlice({
   name: 'expenseItem',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteExpenseItem: (state, action) => {
+      state.expenseItems = state.expenseItems.filter((item) => item.id !== action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getExpenseItem.fulfilled, (state, action) => {
       state.expenseItems = action.payload.items;
@@ -67,6 +84,6 @@ export const expenseItemSlice = createSlice({
   },
 });
 
-export const {} = expenseItemSlice.actions;
+export const { deleteExpenseItem: changeExpenseItems } = expenseItemSlice.actions;
 
 export default expenseItemSlice.reducer;
