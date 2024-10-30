@@ -1,4 +1,3 @@
-export { Footer } from './footer';
 export { Home } from './home';
 export { FormRegister } from './form-register';
 export { FormAuthorization as FormLogin } from './form-authorization';

@@ -53,10 +53,11 @@ export const ExpenseItemList: FC<Props> = ({}) => {
     setIsLoadingButton(true);
     dispatch(deleteExpenseItem(id))
       .then(() => {
-        handleToggleModalDelete();
-        dispatch(deleteExpenseItem(id));
+        dispatch(getExpenseItem()).then(() => {
+          handleToggleModalDelete();
+          setIsLoadingButton(false)
+        });
       })
-      .finally(() => setIsLoadingButton(false));
   };
 
   const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {

@@ -7,7 +7,6 @@ import { UpdateExpenseItemResponse } from '../../types/api/expense-item/update/r
 import { CreateExpenseItemBody } from '../../types/api/expense-item/create/body';
 import { CreateExpenseItemResponse } from '../../types/api/expense-item/create/response';
 
-
 export const createExpenseItem = createAsyncThunk(
   'expenseItem/createExpenseItem',
   async (body: CreateExpenseItemBody, { rejectWithValue }) => {
@@ -15,7 +14,6 @@ export const createExpenseItem = createAsyncThunk(
       const response = await axiosInstance.post('/expense-item/create', body);
       return response.data as CreateExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -28,7 +26,6 @@ export const updateExpenseItem = createAsyncThunk(
       const response = await axiosInstance.put(`/expense-item/${request.id}`, request.body);
       return response.data as UpdateExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -41,7 +38,6 @@ export const deleteExpenseItem = createAsyncThunk(
       const response = await axiosInstance.delete(`/expense-item/${id}`);
       return response.data;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -54,7 +50,6 @@ export const getExpenseItem = createAsyncThunk(
       const response = await axiosInstance.get('/expense-item/my');
       return response.data as GetExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -68,22 +63,15 @@ const initialState: ExpenseItemState = {
 export const expenseItemSlice = createSlice({
   name: 'expenseItem',
   initialState,
-  reducers: {
-    deleteExpenseItem: (state, action) => {
-      state.expenseItems = state.expenseItems.filter((item) => item.id !== action.payload);
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getExpenseItem.fulfilled, (state, action) => {
       state.expenseItems = action.payload.items;
       state.loadStatus = 'success';
     });
-    builder.addCase(getExpenseItem.pending, (state) => {
-      state.loadStatus = 'loading';
-    });
   },
 });
 
-export const { deleteExpenseItem: changeExpenseItems } = expenseItemSlice.actions;
+export const {} = expenseItemSlice.actions;
 
 export default expenseItemSlice.reducer;

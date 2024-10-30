@@ -9,7 +9,6 @@ export const getSupportedLanguages = createAsyncThunk('users/getSupportedLanguag
     const response = await axiosInstance.get('/supported-languages');
     return response.data as SupportedLanguageResponse;
   } catch (error) {
-    console.error(error);
     return rejectWithValue(error);
   }
 });

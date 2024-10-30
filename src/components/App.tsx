@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Footer, Header } from './shared';
+import { Header } from './shared';
 import { AppRoutes } from '../routes/app-routes';
 import i18n from '../i18n';
 import { DefaultApplicationLanguage } from '../lib/constants';

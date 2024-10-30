@@ -9,6 +9,7 @@ import incomeSourceSlice  from './Income-source/IncomeSourceSlice';
 
 import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
+import { LoggingMiddleware } from '../middlewares/logging-middleware';
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +21,7 @@ export const store = configureStore({
     incomeSource: incomeSourceSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware),
+    getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware, LoggingMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
