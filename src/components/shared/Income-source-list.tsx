@@ -59,7 +59,7 @@ export const IncomeSourceList: FC<Props> = ({}) => {
                 id={item.id}
                 name={item.name}
                 color={item.color}
-                expenseItemTypeCode={item.expenseItemType}
+                expenseItemTypeCode={item.incomeSourceType}
                 deleteCard={handleClickDeleteCard}
                 updateCard={handleUpdateCard}
               />

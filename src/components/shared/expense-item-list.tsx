@@ -131,7 +131,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
             loading={isLoadingButton}
             colorButtonTextAgree="error"
             buttonTextAgree={t('buttonExpenseItemDelete')}
-            buttonTextReturn={t('buttonExpenseItemReturn')}
+            buttonTextCancel={t('buttonExpenseItemСancel')}
             handleAgree={handleDelete}
             handleClose={handleToggleModalDelete}
           />

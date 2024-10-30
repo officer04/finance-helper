@@ -33,6 +33,6 @@
   "updateExpenseItemTitle": "Обноление статьи расходов",
   "titleExpenseItemDelete": "Вы точно хотите удалить категорию",
   "buttonExpenseItemDelete": "Удалить",
-  "buttonExpenseItemReturn": "Отмена",
-  "incomeSource": "Источник дохода"
+  "buttonExpenseItemСancel": "Отмена",
+  "incomeSource": "Источники дохода"
 }

@@ -18,12 +18,11 @@ const App: FC = () => {
   }, []);
 
   return (
-    <div className="">
+    <>
       <Header />
       <AppRoutes />
       <Notification />
-      {/* <Footer /> */}
-    </div>
+    </>
   );
 };
 
