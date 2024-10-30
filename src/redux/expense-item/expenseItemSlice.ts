@@ -15,7 +15,6 @@ export const createExpenseItem = createAsyncThunk(
       const response = await axiosInstance.post('/expense-item/create', body);
       return response.data as CreateExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -28,7 +27,6 @@ export const updateExpenseItem = createAsyncThunk(
       const response = await axiosInstance.put(`/expense-item/${request.id}`, request.body);
       return response.data as UpdateExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -41,7 +39,6 @@ export const deleteExpenseItem = createAsyncThunk(
       const response = await axiosInstance.delete(`/expense-item/${id}`);
       return response.data;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -54,7 +51,6 @@ export const getExpenseItem = createAsyncThunk(
       const response = await axiosInstance.get('/expense-item/my');
       return response.data as GetExpenseItemResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },

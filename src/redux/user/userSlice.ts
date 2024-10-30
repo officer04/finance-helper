@@ -17,7 +17,6 @@ export const registerUser = createAsyncThunk(
       const response = await axiosInstance.post('/register', body);
       return response.data as RegisterUserResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -30,7 +29,6 @@ export const authorizationUser = createAsyncThunk(
       const response = await axiosInstance.post('/authorization/credentials', body);
       return response.data as AuthorizationUserResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
@@ -41,7 +39,6 @@ export const getUserMe = createAsyncThunk('users/getUserMe', async (_, { rejectW
     const response = await axiosInstance.get('/user/me');
     return response.data as UserMeResponse;
   } catch (error) {
-    console.error(error);
     return rejectWithValue(error);
   }
 });
@@ -53,7 +50,6 @@ export const updateUserMe = createAsyncThunk(
       const response = await axiosInstance.put('/user/me', body);
       return response.data as UpdateUserMeResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },

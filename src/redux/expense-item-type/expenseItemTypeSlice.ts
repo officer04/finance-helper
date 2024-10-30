@@ -10,7 +10,6 @@ export const getExpenseItemType = createAsyncThunk(
       const response = await axiosInstance.get('/expense-item-type');
       return response.data as ExpenseItemTypeResponse;
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error);
     }
   },
