@@ -52,10 +52,12 @@ export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemInfo
     dispatch(updateExpenseItem(request))
       .unwrap()
       .then(() => {
-        dispatch(getExpenseItem()).then(() => setOpenModal(false));
+        dispatch(getExpenseItem()).then(() => {
+          setOpenModal(false);
+          setIsLoadingButton(false)
+        });
       })
       .catch(() => {})
-      .finally(() => setIsLoadingButton(false));
   };
 
   return (

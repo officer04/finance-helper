@@ -69,9 +69,6 @@ export const expenseItemSlice = createSlice({
       state.expenseItems = action.payload.items;
       state.loadStatus = 'success';
     });
-    builder.addCase(getExpenseItem.pending, (state) => {
-      state.loadStatus = 'loading';
-    });
   },
 });
 
