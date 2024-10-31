@@ -11,16 +11,16 @@ interface Props {
   id: number;
   name: string;
   color: string;
-  expenseItemTypeCode: { code: string; name: string };
-  deleteCard: ( name: string, id: number) => void;
-  updateCard: HandleUpdateCard
+  typeCode: { code: string; name: string };
+  deleteCard: (name: string, id: number) => void;
+  updateCard: HandleUpdateCard;
 }
 
-export const ExpenseItemCard: FC<Props> = ({
+export const Card: FC<Props> = ({
   id,
   name,
   color,
-  expenseItemTypeCode,
+  typeCode,
   deleteCard,
   updateCard,
 }) => {
@@ -38,14 +38,18 @@ export const ExpenseItemCard: FC<Props> = ({
         }}
       >
         <Typography
-          onClick={() => updateCard(id, name, color, expenseItemTypeCode)}
+          onClick={() => updateCard(id, name, color, typeCode)}
           sx={{ width: '150px', p: 2 }}
           variant="body1"
           component="p"
         >
           {name}
         </Typography>
-        <IconButton color="inherit" onClick={(e) => deleteCard(name, id)} sx={{ width: '40px', p: "20px" }}>
+        <IconButton
+          color="inherit"
+          onClick={(e) => deleteCard(name, id)}
+          sx={{ width: '40px', p: '20px' }}
+        >
           <ClearIcon sx={{ position: 'absolute', right: 7, height: '40px' }} />
         </IconButton>
       </Box>

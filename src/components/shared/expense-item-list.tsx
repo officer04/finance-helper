@@ -8,7 +8,7 @@ import { Skeleton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import { FormCreateExpenseItem } from './form-create-exprense-item';
-import { ExpenseItemCard } from './expense-item-card';
+import { Card } from './card';
 import { FloatingActionButton } from './floating-action-button';
 import { ModalBox } from './modal-box';
 import { FormUpdateExpenseItem } from './form-update-exprense-item';
@@ -51,13 +51,12 @@ export const ExpenseItemList: FC<Props> = ({}) => {
 
   const handleDelete = (id: number) => {
     setIsLoadingButton(true);
-    dispatch(deleteExpenseItem(id))
-      .then(() => {
-        dispatch(getExpenseItem()).then(() => {
-          handleToggleModalDelete();
-          setIsLoadingButton(false)
-        });
-      })
+    dispatch(deleteExpenseItem(id)).then(() => {
+      dispatch(getExpenseItem()).then(() => {
+        handleToggleModalDelete();
+        setIsLoadingButton(false);
+      });
+    });
   };
 
   const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {
@@ -92,12 +91,12 @@ export const ExpenseItemList: FC<Props> = ({}) => {
 
           <Grid container spacing={2} justifyContent="space-evenly">
             {expenseItems.map((item) => (
-              <ExpenseItemCard
+              <Card
                 key={item.id}
                 id={item.id}
                 name={item.name}
                 color={item.color}
-                expenseItemTypeCode={item.expenseItemType}
+                typeCode={item.expenseItemType}
                 deleteCard={handleClickDeleteCard}
                 updateCard={handleUpdateCard}
               />
