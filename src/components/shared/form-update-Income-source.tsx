@@ -11,7 +11,7 @@ import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 import { IncomeSourceInfo } from './Income-source-list';
-import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-Income-source copy/form-input-update-Income-source';
+import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
 import { getIncomeSource, updateIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
 
