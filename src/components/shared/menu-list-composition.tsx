@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { ApplicationRoutes } from '../../lib/constants';
 import { useTranslation } from 'react-i18next';
 
-const ITEM_HEIGHT = 25;
+const ITEM_HEIGHT = 45;
 
 export const MenuListComposition: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
