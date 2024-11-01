@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid2';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { Skeleton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { ExpenseItemCard } from './expense-item-card';
 import { FloatingActionButton } from './floating-action-button';
 import { HandleUpdateExpenseItemCard } from '../../types/ui/expense-item-list/handle-update-card';
 import { getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
@@ -13,16 +12,35 @@ import { ModalBox } from './modal-box';
 import { FormCreateIncomeSource } from './form-create-Income-source';
 import { useTranslation } from 'react-i18next';
 import { IncomeSourceCard } from './income-source-card';
+import { FormUpdateIncomeSource } from './form-update-Income-source';
 
 interface Props {}
+
+export interface IncomeSourceInfo {
+  id: number;
+  name: string;
+  color: string;
+  incomeSourceTypeCode: {
+    code: string;
+    name: string;
+  };
+}
 
 export const IncomeSourceList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { incomeSourceItems, loadStatus } = useAppSelector(({ incomeSource }) => incomeSource);
   const [openModalCreate, setOpenModalCreate] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [incomeSourceInfo, setIncomeSourceInfo] = useState<IncomeSourceInfo>({
+    id: 0,
+    name: '',
+    color: '',
+    incomeSourceTypeCode: { code: '', name: '' },
+  });
 
   const handleToggleModalCreate = () => setOpenModalCreate(!openModalCreate);
+  const handleToggleModalUpdate = () => setOpenModalUpdate(!openModalUpdate);
 
   useEffect(() => {
     dispatch(getIncomeSource());
@@ -32,10 +50,15 @@ export const IncomeSourceList: FC<Props> = ({}) => {
     console.log('delete');
   };
 
-  const handleUpdateCard: HandleUpdateExpenseItemCard = (id, name, color, expenseItemTypeCode) => {
-    console.log('update');
+  const handleUpdateCard: HandleUpdateExpenseItemCard = (id, name, color, incomeSourceType) => {
+    handleToggleModalUpdate();
+    setIncomeSourceInfo({
+      id: id,
+      name: name,
+      color: color,
+      incomeSourceTypeCode: { name: incomeSourceType.code, code: incomeSourceType.name },
+    });
   };
-
   return (
     <>
       {loadStatus === 'loading' ? (
@@ -76,6 +99,17 @@ export const IncomeSourceList: FC<Props> = ({}) => {
             open={openModalCreate}
           >
             <FormCreateIncomeSource setOpenModal={setOpenModalCreate} />
+          </ModalBox>
+
+          <ModalBox
+            title={t('inputIncomeSource')}
+            onClose={handleToggleModalUpdate}
+            open={openModalUpdate}
+          >
+            <FormUpdateIncomeSource
+              setOpenModal={setOpenModalUpdate}
+              incomeSourceInfo={incomeSourceInfo}
+            />
           </ModalBox>
         </>
       )}

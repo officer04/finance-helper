@@ -5,57 +5,61 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getExpenseItemType } from '../../redux/expense-item-type/expenseItemTypeSlice';
-import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
+import { updateExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
-import { createIncomeSource, getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
-import { FormInputCreateIncomeSource } from '../../types/ui/form-create-Income-source/form-input-create-Income-source';
+import { IncomeSourceInfo } from './Income-source-list';
+import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
+import { getIncomeSource, updateIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
 
 interface Props {
   setOpenModal: (str: boolean) => void;
+  incomeSourceInfo: IncomeSourceInfo;
 }
 
-export const FormCreateIncomeSource: FC<Props> = ({ setOpenModal }) => {
+export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceInfo }) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const { incomeSourceType } = useAppSelector(({ incomeSourceType }) => incomeSourceType);
 
+
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  function getRandomHexColor(): string {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return `#${randomColor.padStart(6, '0')}`;
-  }
 
-  const randomHexColor = getRandomHexColor();
-  const { handleSubmit, control } = useForm<FormInputCreateIncomeSource>({
+  const { handleSubmit, control } = useForm<FormInputUpdateIncomeSource>({
     mode: 'onSubmit',
-    defaultValues: { name: '', color: randomHexColor, incomeSourceTypeCode: '' },
+    defaultValues: {
+      name: incomeSourceInfo.name,
+      color: incomeSourceInfo.color,
+      incomeSourceTypeCode: incomeSourceInfo.incomeSourceTypeCode.name,
+    },
   });
 
   useEffect(() => {
     dispatch(getIncomeSourceType());
   }, []);
 
-  const onSubmit: SubmitHandler<FormInputCreateIncomeSource> = (data) => {
+  const onSubmit: SubmitHandler<FormInputUpdateIncomeSource> = (data) => {
     setIsLoadingButton(true);
-    const body = {
-      name: data.name,
-      color: data.color,
-      incomeSourceTypeCode: data.incomeSourceTypeCode,
+    const request = {
+      id: incomeSourceInfo.id,
+      body: {
+        name: data.name,
+        color: data.color,
+        incomeSourceTypeCode: data.incomeSourceTypeCode,
+      },
     };
-    dispatch(createIncomeSource(body))
+    dispatch(updateIncomeSource(request))
       .unwrap()
       .then(() => {
         dispatch(getIncomeSource()).then(() => {
           setOpenModal(false);
-          setIsLoadingButton(false);
+          setIsLoadingButton(false)
         });
       })
-      .catch(() => {});
+      .catch(() => {})
   };
 
   return (
@@ -86,7 +90,7 @@ export const FormCreateIncomeSource: FC<Props> = ({ setOpenModal }) => {
       <InputAutocomplete
         control={control}
         name="incomeSourceTypeCode"
-        label={t('inputIncomeSourceTypeCode')}
+        label={t('inputIncomeSource')}
         rules={{
           required: t('inputRequiredFields'),
         }}
@@ -102,7 +106,7 @@ export const FormCreateIncomeSource: FC<Props> = ({ setOpenModal }) => {
           type="submit"
           size="large"
         >
-          {t('buttonCreate')}
+          {t('buttonUpdate')}
         </LoadingButton>
       </div>
     </form>

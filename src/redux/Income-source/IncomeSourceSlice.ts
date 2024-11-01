@@ -4,6 +4,8 @@ import { incomeSourceState } from '../../types/redux/income-source/income-source
 import { GetIncomeSourceResponse } from '../../types/api/income-source/get-all/response';
 import { CreateIncomeSourceResponse } from '../../types/api/income-source/create/response';
 import { CreateIncomeSourceBody } from '../../types/api/income-source/create/body';
+import { UpdateIncomeSourceBody } from '../../types/api/income-source/update/body';
+import { UpdateIncomeSourceResponse } from '../../types/api/income-source/update/response';
 
 export const getIncomeSource = createAsyncThunk(
   'incomeSource/getIncomeSource',
@@ -24,6 +26,18 @@ export const createIncomeSource = createAsyncThunk(
     try {
       const response = await axiosInstance.post('/income-source/create', body);
       return response.data as CreateIncomeSourceResponse;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const updateIncomeSource = createAsyncThunk(
+  'incomeSource/updateIncomeSource',
+  async (request: UpdateIncomeSourceBody, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put(`/income-source/${request.id}`, request.body);
+      return response.data as UpdateIncomeSourceResponse;
     } catch (error) {
       return rejectWithValue(error);
     }
