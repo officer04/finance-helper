@@ -5,13 +5,13 @@ import Grid from '@mui/material/Grid2';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { Skeleton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Card } from './card';
 import { FloatingActionButton } from './floating-action-button';
-import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
+import { HandleUpdateExpenseItemCard } from '../../types/ui/expense-item-list/handle-update-card';
 import { getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
 import { ModalBox } from './modal-box';
 import { FormCreateIncomeSource } from './form-create-Income-source';
 import { useTranslation } from 'react-i18next';
+import { IncomeSourceCard } from './income-source-card';
 import { FormUpdateIncomeSource } from './form-update-Income-source';
 
 interface Props {}
@@ -50,7 +50,7 @@ export const IncomeSourceList: FC<Props> = ({}) => {
     console.log('delete');
   };
 
-  const handleUpdateCard: HandleUpdateCard = (id, name, color, incomeSourceType) => {
+  const handleUpdateCard: HandleUpdateExpenseItemCard = (id, name, color, incomeSourceType) => {
     handleToggleModalUpdate();
     setIncomeSourceInfo({
       id: id,
@@ -59,7 +59,6 @@ export const IncomeSourceList: FC<Props> = ({}) => {
       incomeSourceTypeCode: { name: incomeSourceType.code, code: incomeSourceType.name },
     });
   };
-
   return (
     <>
       {loadStatus === 'loading' ? (
@@ -82,12 +81,12 @@ export const IncomeSourceList: FC<Props> = ({}) => {
 
           <Grid container spacing={2} justifyContent="space-evenly">
             {incomeSourceItems.map((item) => (
-              <Card
+              <IncomeSourceCard
                 key={item.id}
                 id={item.id}
                 name={item.name}
                 color={item.color}
-                typeCode={item.incomeSourceType}
+                IncomeSourceTypeCode={item.incomeSourceType}
                 deleteCard={handleClickDeleteCard}
                 updateCard={handleUpdateCard}
               />
@@ -95,7 +94,7 @@ export const IncomeSourceList: FC<Props> = ({}) => {
           </Grid>
 
           <ModalBox
-            title={t('inputIncomeSource')}
+            title={t('IncomeSourceTitle')}
             onClose={handleToggleModalCreate}
             open={openModalCreate}
           >

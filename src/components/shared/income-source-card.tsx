@@ -5,22 +5,22 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box';
-import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
+import { HandleUpdateIncomeSourceCard } from '../../types/ui/income-source-list/handle-update-card';
 
 interface Props {
   id: number;
   name: string;
   color: string;
-  typeCode: { code: string; name: string };
+  IncomeSourceTypeCode: { code: string; name: string };
   deleteCard: (name: string, id: number) => void;
-  updateCard: HandleUpdateCard;
+  updateCard: HandleUpdateIncomeSourceCard;
 }
 
-export const Card: FC<Props> = ({
+export const IncomeSourceCard: FC<Props> = ({
   id,
   name,
   color,
-  typeCode,
+  IncomeSourceTypeCode,
   deleteCard,
   updateCard,
 }) => {
@@ -38,7 +38,7 @@ export const Card: FC<Props> = ({
         }}
       >
         <Typography
-          onClick={() => updateCard(id, name, color, typeCode)}
+          onClick={() => updateCard(id, name, color, IncomeSourceTypeCode)}
           sx={{ width: '150px', p: 2 }}
           variant="body1"
           component="p"

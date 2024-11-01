@@ -1,4 +1,4 @@
-export interface HandleUpdateCard {
+export interface HandleUpdateExpenseItemCard {
   (
     id: number,
     name: string,
