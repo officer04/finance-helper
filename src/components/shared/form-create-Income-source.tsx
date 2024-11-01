@@ -5,8 +5,6 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getExpenseItemType } from '../../redux/expense-item-type/expenseItemTypeSlice';
-import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
