@@ -10,8 +10,8 @@ import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 import { createIncomeSource, getIncomeSource } from '../../redux/income-source/incomeSourceSlice';
-import { FormInputCreateIncomeSource } from '../../types/ui/form-create-income-source/form-input-create-income-source';
 import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
+import { FormInputCreateIncomeSource } from '../../types/ui/form-create-Income-source/form-input-create-Income-source';
 
 interface Props {
   setOpenModal: (str: boolean) => void;

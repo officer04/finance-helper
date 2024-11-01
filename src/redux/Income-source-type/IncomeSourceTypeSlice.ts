@@ -20,7 +20,7 @@ const initialState: IncomeSourceTypeState = {
   incomeSourceType: [],
 };
 
-export const IncomeSourceTypeSlice = createSlice({
+export const incomeSourceTypeSlice = createSlice({
   name: 'incomeSourceType',
   initialState,
   reducers: {},
@@ -31,6 +31,6 @@ export const IncomeSourceTypeSlice = createSlice({
   },
 });
 
-export const {} = IncomeSourceTypeSlice.actions;
+export const {} = incomeSourceTypeSlice.actions;
 
-export default IncomeSourceTypeSlice.reducer;
+export default incomeSourceTypeSlice.reducer;

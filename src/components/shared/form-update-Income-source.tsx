@@ -5,17 +5,15 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { updateExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 
-import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
-
 import { getIncomeSource, updateIncomeSource } from '../../redux/income-source/incomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
 import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
+import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-Income-source/form-input-update-income-source';
 
 interface Props {
   setOpenModal: (str: boolean) => void;
