@@ -14,8 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { IncomeSourceCard } from './income-source-card';
 import { DialogBox } from './dialog';
 import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
-import { FormCreateIncomeSource } from './form-create-Income-source';
-import { FormUpdateIncomeSource } from './form-update-Income-source';
+import { FormCreateIncomeSource } from './form-create-income-source';
+import { FormUpdateIncomeSource } from './form-update-income-source';
 
 interface Props {}
 
