@@ -6,7 +6,7 @@ import supportedLanguagesSlice from './supported-languages/supportedLanguagesSli
 import expenseItemSlice from './expense-item/expenseItemSlice';
 import expenseItemTypeSlice from './expense-item-type/expenseItemTypeSlice';
 import incomeSourceTypeSlice from './income-source-type/incomeSourceTypeSlice';
-import  incomeSourceSlice  from './income-source/incomeSourceSlice';
+import incomeSourceSlice from './income-source/incomeSourceSlice';
 
 import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
