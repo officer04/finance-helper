@@ -10,10 +10,10 @@ import { updateExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
-import { IncomeSourceInfo } from './Income-source-list';
-import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-Income-source copy/form-input-update-Income-source';
+import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-Income-source/form-input-update-Income-source';
 import { getIncomeSource, updateIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
+import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
 
 interface Props {
   setOpenModal: (str: boolean) => void;

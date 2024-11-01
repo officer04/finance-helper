@@ -1,4 +1,3 @@
-
 export interface ExpenseItemInfo {
   id: number;
   name: string;

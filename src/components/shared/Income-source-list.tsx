@@ -8,23 +8,15 @@ import AddIcon from '@mui/icons-material/Add';
 import { Card } from './card';
 import { FloatingActionButton } from './floating-action-button';
 import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
-import { getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
+import { deleteIncomeSource, getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
 import { ModalBox } from './modal-box';
 import { FormCreateIncomeSource } from './form-create-Income-source';
 import { useTranslation } from 'react-i18next';
 import { FormUpdateIncomeSource } from './form-update-Income-source';
+import { DialogBox } from './dialog';
+import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
 
 interface Props {}
-
-export interface IncomeSourceInfo {
-  id: number;
-  name: string;
-  color: string;
-  incomeSourceTypeCode: {
-    code: string;
-    name: string;
-  };
-}
 
 export const IncomeSourceList: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
@@ -32,6 +24,10 @@ export const IncomeSourceList: FC<Props> = ({}) => {
   const { incomeSourceItems, loadStatus } = useAppSelector(({ incomeSource }) => incomeSource);
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const [titleDeleteExpenseItem, setTitleDeleteExpenseItem] = useState('');
+  const [idDeleteExpenseItem, setIdDeleteExpenseItem] = useState(0);
   const [incomeSourceInfo, setIncomeSourceInfo] = useState<IncomeSourceInfo>({
     id: 0,
     name: '',
@@ -41,13 +37,26 @@ export const IncomeSourceList: FC<Props> = ({}) => {
 
   const handleToggleModalCreate = () => setOpenModalCreate(!openModalCreate);
   const handleToggleModalUpdate = () => setOpenModalUpdate(!openModalUpdate);
+  const handleToggleModalDelete = () => setOpenModalDelete(!openModalDelete);
 
   useEffect(() => {
     dispatch(getIncomeSource());
   }, []);
 
   const handleClickDeleteCard = (name: string, id: number) => {
-    console.log('delete');
+    handleToggleModalDelete();
+    setTitleDeleteExpenseItem(name);
+    setIdDeleteExpenseItem(id);
+  };
+
+  const handleDelete = (id: number) => {
+    setIsLoadingButton(true);
+    dispatch(deleteIncomeSource(id)).then(() => {
+      dispatch(getIncomeSource()).then(() => {
+        handleToggleModalDelete();
+        setIsLoadingButton(false);
+      });
+    });
   };
 
   const handleUpdateCard: HandleUpdateCard = (id, name, color, incomeSourceType) => {
@@ -112,6 +121,19 @@ export const IncomeSourceList: FC<Props> = ({}) => {
               incomeSourceInfo={incomeSourceInfo}
             />
           </ModalBox>
+
+          <DialogBox
+            open={openModalDelete}
+            title={t('titleExpenseItemDelete')}
+            name={titleDeleteExpenseItem}
+            id={idDeleteExpenseItem}
+            loading={isLoadingButton}
+            colorButtonTextAgree="error"
+            buttonTextAgree={t('buttonExpenseItemDelete')}
+            buttonTextCancel={t('buttonExpenseItemСancel')}
+            handleAgree={handleDelete}
+            handleClose={handleToggleModalDelete}
+          />
         </>
       )}
     </>
