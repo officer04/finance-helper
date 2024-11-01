@@ -35,5 +35,9 @@
   "titleExpenseItemDelete": "Are you sure you want to delete a category",
   "buttonExpenseItemDelete": "Delete",
   "buttonExpenseItemСancel": "Сancel",
-  "incomeSource": "Income Source"
+  "incomeSource": "Income Source",
+  "inputIncomeSourceTypeCode": "Income source type",
+  "inputIncomeSource": "Type income source",
+  "IncomeSourceTitle": "New income source",
+  "expenseItemTitle": "New expense item"
 }

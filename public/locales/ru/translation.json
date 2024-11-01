@@ -34,5 +34,9 @@
   "titleExpenseItemDelete": "Вы точно хотите удалить категорию",
   "buttonExpenseItemDelete": "Удалить",
   "buttonExpenseItemСancel": "Отмена",
-  "incomeSource": "Источники дохода"
+  "incomeSource": "Источники дохода",
+  "inputIncomeSourceTypeCode": "Тип источника дохода",
+  "inputIncomeSource": "Тип статьи доходов",
+  "IncomeSourceTitle": "Создание источника дохода",
+  "expenseItemTitle": "Создание статьи расхода"
 }

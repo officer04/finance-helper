@@ -13,7 +13,7 @@ import { FloatingActionButton } from './floating-action-button';
 import { ModalBox } from './modal-box';
 import { FormUpdateExpenseItem } from './form-update-exprense-item';
 import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
-import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
+import { HandleUpdateExpenseItemCard } from '../../types/ui/expense-item-list/handle-update-card';
 import { DialogBox } from './dialog';
 
 interface Props {}
@@ -51,16 +51,15 @@ export const ExpenseItemList: FC<Props> = ({}) => {
 
   const handleDelete = (id: number) => {
     setIsLoadingButton(true);
-    dispatch(deleteExpenseItem(id))
-      .then(() => {
-        dispatch(getExpenseItem()).then(() => {
-          handleToggleModalDelete();
-          setIsLoadingButton(false)
-        });
-      })
+    dispatch(deleteExpenseItem(id)).then(() => {
+      dispatch(getExpenseItem()).then(() => {
+        handleToggleModalDelete();
+        setIsLoadingButton(false);
+      });
+    });
   };
 
-  const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {
+  const handleUpdateCard: HandleUpdateExpenseItemCard = (id, name, color, expenseItemTypeCode) => {
     handleToggleModalUpdate();
     setExpenseItemInfo({
       id: id,
@@ -105,7 +104,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
           </Grid>
 
           <ModalBox
-            title={t('inputExpenseItemTypeCodeExpenseItem')}
+            title={t('expenseItemTitle')}
             onClose={handleToggleModalCreate}
             open={openModalCreate}
           >
