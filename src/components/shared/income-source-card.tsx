@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box';
-import { HandleUpdateIncomeSourceCard } from '../../types/ui/income-source-list/handle-update-card';
+import { HandleUpdateIncomeSourceCard } from '../../types/ui/Income-source-list/handle-update-card';
 
 interface Props {
   id: number;

@@ -11,11 +11,10 @@ import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 
-import { IncomeSourceInfo } from './Income-source-list';
 import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
 
-import { getIncomeSource, updateIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
-import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
+import { getIncomeSource, updateIncomeSource } from '../../redux/income-source/incomeSourceSlice';
+import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
 import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
 
 interface Props {
@@ -26,7 +25,6 @@ interface Props {
 export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceInfo }) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const { incomeSourceType } = useAppSelector(({ incomeSourceType }) => incomeSourceType);
-
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -59,10 +57,10 @@ export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceIn
       .then(() => {
         dispatch(getIncomeSource()).then(() => {
           setOpenModal(false);
-          setIsLoadingButton(false)
+          setIsLoadingButton(false);
         });
       })
-      .catch(() => {})
+      .catch(() => {});
   };
 
   return (
