@@ -8,12 +8,12 @@ import { Skeleton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
 import { FormCreateExpenseItem } from './form-create-exprense-item';
-import { Card } from './card';
+import { ExpenseItemCard } from './expense-item-card';
 import { FloatingActionButton } from './floating-action-button';
 import { ModalBox } from './modal-box';
 import { FormUpdateExpenseItem } from './form-update-exprense-item';
 import { ExpenseItemInfo } from '../../types/ui/expense-item-list/expense-item-info';
-import { HandleUpdateCard } from '../../types/ui/expense-item-list/handle-update-card';
+import { HandleUpdateExpenseItemCard } from '../../types/ui/expense-item-list/handle-update-card';
 import { DialogBox } from './dialog';
 
 interface Props {}
@@ -59,7 +59,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
     });
   };
 
-  const handleUpdateCard: HandleUpdateCard = (id, name, color, expenseItemTypeCode) => {
+  const handleUpdateCard: HandleUpdateExpenseItemCard = (id, name, color, expenseItemTypeCode) => {
     handleToggleModalUpdate();
     setExpenseItemInfo({
       id: id,
@@ -91,12 +91,12 @@ export const ExpenseItemList: FC<Props> = ({}) => {
 
           <Grid container spacing={2} justifyContent="space-evenly">
             {expenseItems.map((item) => (
-              <Card
+              <ExpenseItemCard
                 key={item.id}
                 id={item.id}
                 name={item.name}
                 color={item.color}
-                typeCode={item.expenseItemType}
+                expenseItemTypeCode={item.expenseItemType}
                 deleteCard={handleClickDeleteCard}
                 updateCard={handleUpdateCard}
               />
@@ -104,7 +104,7 @@ export const ExpenseItemList: FC<Props> = ({}) => {
           </Grid>
 
           <ModalBox
-            title={t('inputExpenseItemTypeCodeExpenseItem')}
+            title={t('expenseItemTitle')}
             onClose={handleToggleModalCreate}
             open={openModalCreate}
           >

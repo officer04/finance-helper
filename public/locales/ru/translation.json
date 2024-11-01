@@ -36,5 +36,7 @@
   "buttonExpenseItemСancel": "Отмена",
   "incomeSource": "Источники дохода",
   "inputIncomeSourceTypeCode": "Тип источника дохода",
-  "inputIncomeSource": "Тип статьи доходов"
+  "inputIncomeSource": "Тип статьи доходов",
+  "IncomeSourceTitle": "Создание источника дохода",
+  "expenseItemTitle": "Создание статьи расхода"
 }

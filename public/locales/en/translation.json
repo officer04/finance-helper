@@ -37,5 +37,7 @@
   "buttonExpenseItemСancel": "Сancel",
   "incomeSource": "Income Source",
   "inputIncomeSourceTypeCode": "Income source type",
-  "inputIncomeSource": "Type income source"
+  "inputIncomeSource": "Type income source",
+  "IncomeSourceTitle": "New income source",
+  "expenseItemTitle": "New expense item"
 }
