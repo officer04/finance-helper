@@ -12,8 +12,8 @@ import ColorPicker from './color-picker';
 
 import { getIncomeSource, updateIncomeSource } from '../../redux/income-source/incomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
-import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
-import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-Income-source/form-input-update-income-source';
+import { IncomeSourceInfo } from '../../types/ui/income-source-list/income-source-info';
+import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
 
 interface Props {
   setOpenModal: (str: boolean) => void;

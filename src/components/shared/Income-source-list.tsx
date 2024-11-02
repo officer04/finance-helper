@@ -13,9 +13,9 @@ import { ModalBox } from './modal-box';
 import { useTranslation } from 'react-i18next';
 import { IncomeSourceCard } from './income-source-card';
 import { DialogBox } from './dialog';
-import { IncomeSourceInfo } from '../../types/ui/Income-source-list/Income-source-info';
 import { FormCreateIncomeSource } from './form-create-income-source';
 import { FormUpdateIncomeSource } from './form-update-income-source';
+import { IncomeSourceInfo } from '../../types/ui/income-source-list/income-source-info';
 
 interface Props {}
 

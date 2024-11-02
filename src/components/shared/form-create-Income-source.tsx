@@ -11,7 +11,7 @@ import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
 import { createIncomeSource, getIncomeSource } from '../../redux/income-source/incomeSourceSlice';
 import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
-import { FormInputCreateIncomeSource } from '../../types/ui/form-create-Income-source/form-input-create-Income-source';
+import { FormInputCreateIncomeSource } from '../../types/ui/form-create-income-source/form-input-create-income-source';
 
 interface Props {
   setOpenModal: (str: boolean) => void;

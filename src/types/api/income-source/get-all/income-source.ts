@@ -1,4 +1,4 @@
-import { IncomeSourceType } from "./Income-source-type";
+import { IncomeSourceType } from "./income-source-type";
 
 export interface IncomeSource {
   id: number;
