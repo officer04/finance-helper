@@ -39,5 +39,8 @@
   "inputIncomeSourceTypeCode": "Income source type",
   "inputIncomeSource": "Type income source",
   "IncomeSourceTitle": "New income source",
-  "expenseItemTitle": "New expense item"
+  "expenseItemTitle": "New expense item",
+  "namePageIncomeSource": "Income source",
+  "namePageExpenseItem": "Expense item",
+  "namePageProfile": "Profile"
 }
