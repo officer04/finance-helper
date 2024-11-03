@@ -10,13 +10,15 @@ import { IncomeSourceList } from '../components/shared/income-source-list';
 
 export const AppRoutes: FC = () => {
   return (
-    <Routes>
-      <Route element={<PrivateRouter />}>
-        <Route path={ApplicationRoutes.PROFILE} element={<ProfileUser />} />
-        <Route path={ApplicationRoutes.EXPENSE_ITEM} element={<ExpenseItemList />} />
-        <Route path={ApplicationRoutes.INCOME_SOURCE} element={<IncomeSourceList />} />
-      </Route>
-      <Route path={ApplicationRoutes.HOME} element={<Home />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route element={<PrivateRouter />}>
+          <Route path={ApplicationRoutes.PROFILE} element={<ProfileUser />} />
+          <Route path={ApplicationRoutes.EXPENSE_ITEM} element={<ExpenseItemList />} />
+          <Route path={ApplicationRoutes.INCOME_SOURCE} element={<IncomeSourceList />} />
+        </Route>
+        <Route path={ApplicationRoutes.HOME} element={<Home />} />
+      </Routes>
+    </>
   );
 };

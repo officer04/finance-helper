@@ -38,5 +38,8 @@
   "inputIncomeSourceTypeCode": "Тип источника дохода",
   "inputIncomeSource": "Тип статьи доходов",
   "IncomeSourceTitle": "Создание источника дохода",
-  "expenseItemTitle": "Создание статьи расхода"
+  "expenseItemTitle": "Создание статьи расхода",
+  "namePageIncomeSource": "Источники дохода",
+  "namePageExpenseItem": "Категории трат",
+  "namePageProfile": "Профиль"
 }
