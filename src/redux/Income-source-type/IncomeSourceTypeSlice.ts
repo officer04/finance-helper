@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { axiosInstance } from '..';
-import { ExpenseItemTypeState } from '../../types/redux/expense-item-type/expense-Item-type-state';
 import { IncomeSourceTypeResponse } from '../../types/api/income-source-type/response';
 import { IncomeSourceTypeState } from '../../types/redux/income-source-type/income-source-type-state';
-
 export const getIncomeSourceType = createAsyncThunk(
   'incomeSourceType/getIncomeSourceType',
   async (_, { rejectWithValue }) => {
