@@ -19,7 +19,7 @@ import { IncomeSourceInfo } from '../../types/ui/income-source-list/income-sourc
 
 interface Props {}
 
-export const IncomeSourceList: FC<Props> = ({}) => {
+export const IncomeSourceList: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { incomeSourceItems, loadStatus } = useAppSelector(({ incomeSource }) => incomeSource);

@@ -4,7 +4,7 @@ import { Autocomplete, Paper, styled, TextField } from '@mui/material';
 import { BaseInputProps } from '../../types/shared/base-input-props';
 import { AutocompleteOptions } from '../../types/ui/input-autocomplete/autocomplete-options';
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
+const StyledPaper = styled(Paper)(() => ({
   maxHeight: 250,
   overflowY: 'auto',
 }));
