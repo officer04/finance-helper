@@ -44,6 +44,18 @@ export const updateIncomeSource = createAsyncThunk(
   },
 );
 
+export const deleteIncomeSource = createAsyncThunk(
+  'incomeSource/deleteIncomeSource',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.delete(`/income-source/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState: incomeSourceState = {
   incomeSourceItems: [],
   loadStatus: 'loading',

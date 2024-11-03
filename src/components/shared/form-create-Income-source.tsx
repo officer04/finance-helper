@@ -5,15 +5,13 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getExpenseItemType } from '../../redux/expense-item-type/expenseItemTypeSlice';
-import { getExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
-import { createIncomeSource, getIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
-import { FormInputCreateIncomeSource } from '../../types/ui/form-create-Income-source/form-input-create-Income-source';
-import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
+import { createIncomeSource, getIncomeSource } from '../../redux/income-source/incomeSourceSlice';
+import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
+import { FormInputCreateIncomeSource } from '../../types/ui/form-create-income-source/form-input-create-income-source';
 
 interface Props {
   setOpenModal: (str: boolean) => void;

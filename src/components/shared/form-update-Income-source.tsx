@@ -5,15 +5,15 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { updateExpenseItem } from '../../redux/expense-item/expenseItemSlice';
 
 import InputText from './input-text';
 import InputAutocomplete from './input-autocomplete';
 import ColorPicker from './color-picker';
-import { IncomeSourceInfo } from './Income-source-list';
+
+import { getIncomeSource, updateIncomeSource } from '../../redux/income-source/incomeSourceSlice';
+import { getIncomeSourceType } from '../../redux/income-source-type/incomeSourceTypeSlice';
+import { IncomeSourceInfo } from '../../types/ui/income-source-list/income-source-info';
 import { FormInputUpdateIncomeSource } from '../../types/ui/form-update-income-source/form-input-update-income-source';
-import { getIncomeSource, updateIncomeSource } from '../../redux/Income-source/IncomeSourceSlice';
-import { getIncomeSourceType } from '../../redux/Income-source-type/IncomeSourceTypeSlice';
 
 interface Props {
   setOpenModal: (str: boolean) => void;
@@ -23,7 +23,6 @@ interface Props {
 export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceInfo }) => {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const { incomeSourceType } = useAppSelector(({ incomeSourceType }) => incomeSourceType);
-
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -56,10 +55,10 @@ export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceIn
       .then(() => {
         dispatch(getIncomeSource()).then(() => {
           setOpenModal(false);
-          setIsLoadingButton(false)
+          setIsLoadingButton(false);
         });
       })
-      .catch(() => {})
+      .catch(() => {});
   };
 
   return (

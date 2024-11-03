@@ -4,9 +4,9 @@ import userSlice from './user/userSlice';
 import notificationSlice from './notification/notificationSlice';
 import supportedLanguagesSlice from './supported-languages/supportedLanguagesSlice';
 import expenseItemSlice from './expense-item/expenseItemSlice';
-import expenseItemTypeSlice  from './expense-item-type/expenseItemTypeSlice';
-import incomeSourceSlice  from './Income-source/IncomeSourceSlice';
-import  IncomeSourceTypeSlice  from './Income-source-type/IncomeSourceTypeSlice';
+import expenseItemTypeSlice from './expense-item-type/expenseItemTypeSlice';
+import incomeSourceTypeSlice from './income-source-type/incomeSourceTypeSlice';
+import incomeSourceSlice from './income-source/incomeSourceSlice';
 
 import { NotificationMiddleware } from '../middlewares/notification-middleware';
 import { AuthorizationMiddleware } from '../middlewares/authorization-middleware';
@@ -20,10 +20,14 @@ export const store = configureStore({
     expenseItem: expenseItemSlice,
     expenseItemType: expenseItemTypeSlice,
     incomeSource: incomeSourceSlice,
-    incomeSourceType: IncomeSourceTypeSlice
+    incomeSourceType: incomeSourceTypeSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(NotificationMiddleware, AuthorizationMiddleware, LoggingMiddleware),
+    getDefaultMiddleware().concat(
+      NotificationMiddleware,
+      AuthorizationMiddleware,
+      LoggingMiddleware,
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

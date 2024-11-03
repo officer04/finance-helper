@@ -6,7 +6,7 @@ import { Home } from '../components/shared';
 import { PrivateRouter } from './private-routes';
 import { ApplicationRoutes } from '../lib/constants';
 import { ExpenseItemList } from '../components/shared/expense-item-list';
-import { IncomeSourceList } from '../components/shared/Income-source-list';
+import { IncomeSourceList } from '../components/shared/income-source-list';
 
 export const AppRoutes: FC = () => {
   return (
