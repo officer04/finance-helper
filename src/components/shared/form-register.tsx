@@ -129,7 +129,7 @@ export const FormRegister: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonRegister')}
+          {t('buttonTextRegister')}
         </LoadingButton>
       </div>
     </form>

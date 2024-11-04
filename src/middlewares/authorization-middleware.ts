@@ -9,7 +9,7 @@ export const AuthorizationMiddleware: Middleware = (store) => (next) => (action)
   if (isRejectedWithValue(action)) {
     const payload = action.payload as MiddlewareActionError;
     if (payload.type === MiddlewareActionErrorType.AxiosError) {
-      if (payload.statusCode === HttpStatusCode.UN_AUTHORIZATION) {
+      if (payload.statusCode === HttpStatusCode.UNAUTHORIZED) {
         store.dispatch(changeAuth(false));
         localStorage.removeItem('bearerToken');
       }

@@ -77,7 +77,7 @@ export const FormAuthorization: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonAuthorization')}
+          {t('buttonTextAuthorization')}
         </LoadingButton>
       </div>
     </form>

@@ -88,7 +88,7 @@ export const FormUpdateExpenseItem: FC<Props> = ({ setOpenModal, expenseItemInfo
       <InputAutocomplete
         control={control}
         name="expenseItemTypeCode"
-        label={t('inputExpenseItemTypeCodeExpenseItem')}
+        label={t('inputExpenseItemTypeCode')}
         rules={{
           required: t('inputRequiredFields'),
         }}

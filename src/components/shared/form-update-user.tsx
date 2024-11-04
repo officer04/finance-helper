@@ -139,7 +139,7 @@ export const FormUpdateUser: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonSave')}
+          {t('buttonTextUpdate')}
         </LoadingButton>
       </div>
     </form>

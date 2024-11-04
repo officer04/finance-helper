@@ -15,7 +15,7 @@ export const NotificationMiddleware: Middleware = (store) => (next) => (action) 
 
   if (
     payload.type !== MiddlewareActionErrorType.AxiosError ||
-    payload.statusCode === HttpStatusCode.UN_AUTHORIZATION
+    payload.statusCode === HttpStatusCode.UNAUTHORIZED
   )
     return next(action);
 
