@@ -2,8 +2,8 @@ import { FC, useEffect } from 'react';
 import { Header } from './shared';
 import { AppRoutes } from '../routes/app-routes';
 import i18n from '../i18n';
-import { DefaultApplicationLanguage } from '../lib/constants';
 import { Notification } from './shared/notification';
+import { DefaultApplicationLanguage } from '../types/shared/default-application-language';
 
 const App: FC = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const App: FC = () => {
         if (err) return console.log('Error loading language:', err);
       });
     } else {
-      i18n.changeLanguage(DefaultApplicationLanguage.DEFAULT);
+      i18n.changeLanguage(DefaultApplicationLanguage);
     }
   }, []);
 

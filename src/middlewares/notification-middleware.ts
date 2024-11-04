@@ -4,7 +4,8 @@ import { MiddlewareActionError } from '../types/shared/middleware-action-error';
 import { changeNotification } from '../redux/notification/notificationSlice';
 import { MiddlewareActionErrorType } from '../types/shared/middleware-action-error-type';
 import { NotificationType } from '../types/ui/snackbar/notification-type';
-import { ApplicationLanguage } from '../lib/constants';
+import { ApplicationLanguage } from '../types/shared/application-language';
+import { HttpStatusCode } from '../types/shared/http-status-code';
 
 const language = localStorage.getItem('selectedLanguage');
 
@@ -12,11 +13,16 @@ export const NotificationMiddleware: Middleware = (store) => (next) => (action) 
   if (!isRejectedWithValue(action)) return next(action);
   const payload = action.payload as MiddlewareActionError;
 
-  if (payload.type !== MiddlewareActionErrorType.AxiosError || payload.statusCode === 401)
+  if (
+    payload.type !== MiddlewareActionErrorType.AxiosError ||
+    payload.statusCode === HttpStatusCode.UN_AUTHORIZATION
+  )
     return next(action);
 
   if (
-    (payload.statusCode === 409 || payload.statusCode === 403 || payload.statusCode === 400) &&
+    (payload.statusCode === HttpStatusCode.CONFLICT ||
+      payload.statusCode === HttpStatusCode.FORBIDDEN ||
+      payload.statusCode === HttpStatusCode.BAD_REQUEST) &&
     payload.detail
   ) {
     store.dispatch(
