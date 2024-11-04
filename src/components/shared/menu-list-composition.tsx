@@ -5,10 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { ApplicationRoutes } from '../../lib/constants';
 import { useTranslation } from 'react-i18next';
-
-const ITEM_HEIGHT = 45;
+import { ApplicationRoutes } from '../../types/shared/application-routes';
 
 export const MenuListComposition: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,6 +24,8 @@ export const MenuListComposition: FC = () => {
     { link: ApplicationRoutes.EXPENSE_ITEM, name: t('expenseItem') },
     { link: ApplicationRoutes.INCOME_SOURCE, name: t('incomeSource') },
   ];
+
+  const ITEM_HEIGHT = 15 * options.length;
 
   return (
     <div>

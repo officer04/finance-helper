@@ -27,8 +27,8 @@ export const IncomeSourceList: FC<Props> = () => {
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
-  const [titleDeleteExpenseItem, setTitleDeleteExpenseItem] = useState('');
-  const [idDeleteExpenseItem, setIdDeleteExpenseItem] = useState(0);
+  const [titleIncomeSourceDelete, setTitleIncomeSourceDelete] = useState('');
+  const [idIncomeSourceDelete, setIncomeSourceDelete] = useState(0);
   const [incomeSourceInfo, setIncomeSourceInfo] = useState<IncomeSourceInfo>({
     id: 0,
     name: '',
@@ -46,8 +46,8 @@ export const IncomeSourceList: FC<Props> = () => {
 
   const handleClickDeleteCard = (name: string, id: number) => {
     handleToggleModalDelete();
-    setTitleDeleteExpenseItem(name);
-    setIdDeleteExpenseItem(id);
+    setTitleIncomeSourceDelete(name);
+    setIncomeSourceDelete(id);
   };
 
   const handleDelete = (id: number) => {
@@ -104,7 +104,7 @@ export const IncomeSourceList: FC<Props> = () => {
           </Grid>
 
           <ModalBox
-            title={t('IncomeSourceTitle')}
+            title={t('titleIncomeSourceCreate')}
             onClose={handleToggleModalCreate}
             open={openModalCreate}
           >
@@ -112,7 +112,7 @@ export const IncomeSourceList: FC<Props> = () => {
           </ModalBox>
 
           <ModalBox
-            title={t('inputIncomeSource')}
+            title={t('titleIncomeSourceUpdate')}
             onClose={handleToggleModalUpdate}
             open={openModalUpdate}
           >
@@ -124,13 +124,13 @@ export const IncomeSourceList: FC<Props> = () => {
 
           <DialogBox
             open={openModalDelete}
-            title={t('titleExpenseItemDelete')}
-            name={titleDeleteExpenseItem}
-            id={idDeleteExpenseItem}
+            title={t('titleCategoryDelete')}
+            name={titleIncomeSourceDelete}
+            id={idIncomeSourceDelete}
             loading={isLoadingButton}
             colorButtonTextAgree="error"
-            buttonTextAgree={t('buttonExpenseItemDelete')}
-            buttonTextCancel={t('buttonExpenseItemСancel')}
+            buttonTextAgree={t('buttonTextDelete')}
+            buttonTextCancel={t('buttonTextCancel')}
             handleAgree={handleDelete}
             handleClose={handleToggleModalDelete}
           />

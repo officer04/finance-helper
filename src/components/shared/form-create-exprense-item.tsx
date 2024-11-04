@@ -84,7 +84,7 @@ export const FormCreateExpenseItem: FC<Props> = ({ setOpenModal }) => {
       <InputAutocomplete
         control={control}
         name="expenseItemTypeCode"
-        label={t('inputExpenseItemTypeCodeExpenseItem')}
+        label={t('inputExpenseItemTypeCode')}
         rules={{
           required: t('inputRequiredFields'),
         }}
@@ -100,7 +100,7 @@ export const FormCreateExpenseItem: FC<Props> = ({ setOpenModal }) => {
           type="submit"
           size="large"
         >
-          {t('buttonCreate')}
+          {t('buttonTextCreate')}
         </LoadingButton>
       </div>
     </form>

@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch } from '../../redux/hooks';
 import { authorizationUser } from '../../redux/user/userSlice';
-import { ApplicationRoutes, RegexConstants } from '../../lib/constants';
 import { FormInputAuthorization } from '../../types/ui/form-login/form-input-authorization';
 import { useNavigate } from 'react-router-dom';
 import InputText from './input-text';
 import InputPassword from './input-password';
+import { ApplicationRoutes } from '../../types/shared/application-routes';
+import { RegexConstants } from '../../types/shared/regex-constants';
 
 interface Props {}
 
@@ -76,7 +77,7 @@ export const FormAuthorization: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonAuthorization')}
+          {t('buttonTextAuthorization')}
         </LoadingButton>
       </div>
     </form>

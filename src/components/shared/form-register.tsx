@@ -6,11 +6,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/user/userSlice';
-import { ApplicationRoutes } from '../../lib/constants';
 import { FormInputRegister } from '../../types/ui/form-register/form-input-register';
 import { useNavigate } from 'react-router-dom';
 import InputText from './input-text';
 import InputPassword from './input-password';
+import { ApplicationRoutes } from '../../types/shared/application-routes';
+import { RegexConstants } from '../../types/shared/regex-constants';
 
 interface Props {}
 
@@ -86,12 +87,8 @@ export const FormRegister: FC<Props> = () => {
         label={t('inputEmailUser')}
         rules={{
           required: t('inputRequiredFields'),
-          minLength: {
-            value: 2,
-            message: t('inputErrorEmail'),
-          },
-          maxLength: {
-            value: 32,
+          pattern: {
+            value: RegexConstants.EMAIL,
             message: t('inputErrorEmail'),
           },
         }}
@@ -104,12 +101,8 @@ export const FormRegister: FC<Props> = () => {
         label={t('inputPasswordUser')}
         rules={{
           required: t('inputRequiredFields'),
-          minLength: {
-            value: 2,
-            message: t('inputErrorPassword'),
-          },
-          maxLength: {
-            value: 32,
+          pattern: {
+            value: RegexConstants.PASSWORD,
             message: t('inputErrorPassword'),
           },
         }}
@@ -136,7 +129,7 @@ export const FormRegister: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonRegister')}
+          {t('buttonTextRegister')}
         </LoadingButton>
       </div>
     </form>

@@ -42,7 +42,7 @@ export const DialogBox: FC<Props> = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title" sx={{ textAlign: 'center' }}>
-        {title} {name}?
+        {title} "{name}"?
       </DialogTitle>
       {text && (
         <DialogContent>

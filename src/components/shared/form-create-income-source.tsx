@@ -100,7 +100,7 @@ export const FormCreateIncomeSource: FC<Props> = ({ setOpenModal }) => {
           type="submit"
           size="large"
         >
-          {t('buttonCreate')}
+          {t('buttonTextCreate')}
         </LoadingButton>
       </div>
     </form>

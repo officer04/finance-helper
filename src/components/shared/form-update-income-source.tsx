@@ -105,7 +105,7 @@ export const FormUpdateIncomeSource: FC<Props> = ({ setOpenModal, incomeSourceIn
           type="submit"
           size="large"
         >
-          {t('buttonUpdate')}
+          {t('buttonTextUpdate')}
         </LoadingButton>
       </div>
     </form>

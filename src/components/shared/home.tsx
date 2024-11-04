@@ -30,10 +30,10 @@ export const Home: FC = () => {
             size="medium"
             onClick={handleToggleModalLogin}
           >
-            {t('buttonOpenModalLogin')}
+            {t('buttonTextOpenModalLogin')}
           </Button>
           <Button variant="outlined" size="medium" onClick={handleToggleModalRegister}>
-            {t('buttonOpenModalRegister')}
+            {t('buttonTextOpenModalRegister')}
           </Button>
         </div>
       </div>

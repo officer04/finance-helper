@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getUserMe, updateUserMe } from '../../redux/user/userSlice';
-import { ApplicationLanguage, RegexConstants } from '../../lib/constants';
 import { FormInputUpdateUser } from '../../types/ui/form-update-user/form-input-update-user';
 import { getSupportedLanguages } from '../../redux/supported-languages/supportedLanguagesSlice';
 import InputText from './input-text';
 import InputSelect from './input-select';
 import { changeNotification } from '../../redux/notification/notificationSlice';
 import { NotificationType } from '../../types/ui/snackbar/notification-type';
+import { RegexConstants } from '../../types/shared/regex-constants';
 
 interface Props {}
 
@@ -139,7 +139,7 @@ export const FormUpdateUser: FC<Props> = () => {
           type="submit"
           size="large"
         >
-          {t('buttonSave')}
+          {t('buttonTextUpdate')}
         </LoadingButton>
       </div>
     </form>
